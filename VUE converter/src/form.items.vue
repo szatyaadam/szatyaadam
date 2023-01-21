@@ -1,7 +1,7 @@
 <template>
 <div>
         Válasszon mértékegységet
-    <select v-model="mertek"  >
+    <select v-model="mertek"  @change="setDataTONull">
         <option value="-1" disabled selected>Válasszon</option>
         <option value="Hossz_mertek">Hossz mérték</option>
         <option value="Terfogat">Térfogat</option>
@@ -10,8 +10,8 @@
         
     </select>
 </div>
-<div v-if="mertek=='Hossz_mertek'">
-           
+<div v-if="mertek=='Hossz_mertek'" >
+            
            A megadott Hosszmérték  <input type="number"  id="numbers" :value="adat1"  @change="setLength" placeholder="Adjon meg egy számot!">
            <select id="fromLength" @change="setLength">
                    <option value=1>mm</option>
@@ -127,6 +127,11 @@ import {ref}from "vue";
     const Weight2=[1000,10,100,1000]
     const Time2=[60,60,60,24]
 
+function setDataTONull()
+{
+   adat1.value=0;
+   adat2.value=0;
+}
 
 function setVolume(e, v = +e.target.value) {
     adat1.value = numbers2.value
@@ -144,6 +149,7 @@ function setVolume(e, v = +e.target.value) {
 function setLength(e, v = +e.target.value) {
     adat1.value = numbers.value
     adat2.value=(adat1.value/Math.pow(10,(toLength.value-fromLength.value)))   
+    
 }
 function setweight(e, v = +e.target.value) {
     v=numbers3.value
