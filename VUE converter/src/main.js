@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import App from './form.items.vue'
+import App from './MainConverter.vue'
 
 import './assets/main.css'
 
