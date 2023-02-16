@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "pvX4GPmk8DCoJPYjuuSOqrzd9D0DknO5ctbeCa2BpNo=",
+  "Source": "CookBook.API",
+  "BasePath": "_content/CookBook.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
