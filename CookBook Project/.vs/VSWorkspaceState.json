@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Asztali",
+    "\\Backend",
+    "\\Backend\\ApiClient",
+    "\\Backend\\cookbookAPI",
+    "\\Backend\\cookbookAPI\\CookBook.Models",
+    "\\Backend\\cookbookAPI\\cookbookAPI"
+  ],
+  "SelectedNode": "\\Asztali\\.gitkeep",
+  "PreviewInSolutionExplorer": false
+}

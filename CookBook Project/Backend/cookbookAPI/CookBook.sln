@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookBook.API", "cookbookAPI\CookBook.API.csproj", "{8A4134A5-9146-45EB-8392-1E2B60C0D4A0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BB81E9F1-A588-4255-9BD9-8DDC45DBA0F7} = {BB81E9F1-A588-4255-9BD9-8DDC45DBA0F7}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookBook.JWTSecurity", "..\JWTSecurity\CookBook.JWTSecurity.csproj", "{425C608B-6687-4131-AB85-EC72E8D3CBA6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookBook.ApiClient", "..\ApiClient\CookBook.ApiClient.csproj", "{7B843BF9-D2C2-445D-AAE3-EA6D0D6818E9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookBook.Models", "CookBook.Models\CookBook.Models.csproj", "{00D4B6D5-47D7-4F4D-8C10-F6D08F177F15}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookBook.WPF", "..\..\Asztali\CookBook.WPF\CookBook.WPF\CookBook.WPF.csproj", "{BB81E9F1-A588-4255-9BD9-8DDC45DBA0F7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookBook.API.Tests", "..\..\..\Tesztesetek\CookBookAPITests\CookBookAPITests\CookBook.API.Tests.csproj", "{30A6AF4E-E2FA-4915-94E9-F0B4F43485B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A4134A5-9146-45EB-8392-1E2B60C0D4A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A4134A5-9146-45EB-8392-1E2B60C0D4A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A4134A5-9146-45EB-8392-1E2B60C0D4A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A4134A5-9146-45EB-8392-1E2B60C0D4A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{425C608B-6687-4131-AB85-EC72E8D3CBA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{425C608B-6687-4131-AB85-EC72E8D3CBA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{425C608B-6687-4131-AB85-EC72E8D3CBA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{425C608B-6687-4131-AB85-EC72E8D3CBA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B843BF9-D2C2-445D-AAE3-EA6D0D6818E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B843BF9-D2C2-445D-AAE3-EA6D0D6818E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B843BF9-D2C2-445D-AAE3-EA6D0D6818E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B843BF9-D2C2-445D-AAE3-EA6D0D6818E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00D4B6D5-47D7-4F4D-8C10-F6D08F177F15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00D4B6D5-47D7-4F4D-8C10-F6D08F177F15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00D4B6D5-47D7-4F4D-8C10-F6D08F177F15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00D4B6D5-47D7-4F4D-8C10-F6D08F177F15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB81E9F1-A588-4255-9BD9-8DDC45DBA0F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB81E9F1-A588-4255-9BD9-8DDC45DBA0F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB81E9F1-A588-4255-9BD9-8DDC45DBA0F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB81E9F1-A588-4255-9BD9-8DDC45DBA0F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E82A3FF0-B1A3-4E19-A48F-DC8BE9AC123D}
+	EndGlobalSection
+EndGlobal

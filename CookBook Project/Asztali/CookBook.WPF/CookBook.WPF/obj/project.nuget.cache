@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "Tw8e51jBob+u3iN95euG75YGYJ5iTlcWLKyTsmfYNuTA3cBK69/rs1Ji0HoyIAsyFgCpfJIkOWd3j3+UIq4BlA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Asztali\\CookBook.WPF\\CookBook.WPF\\CookBook.WPF.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\adam\\.nuget\\packages\\communitytoolkit.mvvm\\8.1.0\\communitytoolkit.mvvm.8.1.0.nupkg.sha512",
+    "C:\\Users\\adam\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.11\\microsoft.entityframeworkcore.abstractions.6.0.11.nupkg.sha512",
+    "C:\\Users\\adam\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\6.0.1\\microsoft.extensions.dependencyinjection.6.0.1.nupkg.sha512",
+    "C:\\Users\\adam\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\adam\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\adam\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
+    "C:\\Users\\adam\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
