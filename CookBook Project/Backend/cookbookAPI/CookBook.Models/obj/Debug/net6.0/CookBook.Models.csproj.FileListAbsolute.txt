@@ -10,3 +10,15 @@ C:\Users\adam\source\repos\receptek\Forráskód\Backend\cookbookAPI\CookBook.Mod
 C:\Users\adam\source\repos\receptek\Forráskód\Backend\cookbookAPI\CookBook.Models\obj\Debug\net6.0\refint\CookBook.Models.dll
 C:\Users\adam\source\repos\receptek\Forráskód\Backend\cookbookAPI\CookBook.Models\obj\Debug\net6.0\CookBook.Models.pdb
 C:\Users\adam\source\repos\receptek\Forráskód\Backend\cookbookAPI\CookBook.Models\obj\Debug\net6.0\ref\CookBook.Models.dll
+C:\Users\adam\source\repos\szatyaadam\CookBook Project\Backend\cookbookAPI\CookBook.Models\bin\Debug\net6.0\CookBook.Models.deps.json
+C:\Users\adam\source\repos\szatyaadam\CookBook Project\Backend\cookbookAPI\CookBook.Models\bin\Debug\net6.0\CookBook.Models.dll
+C:\Users\adam\source\repos\szatyaadam\CookBook Project\Backend\cookbookAPI\CookBook.Models\bin\Debug\net6.0\CookBook.Models.pdb
+C:\Users\adam\source\repos\szatyaadam\CookBook Project\Backend\cookbookAPI\CookBook.Models\obj\Debug\net6.0\CookBook.Models.csproj.AssemblyReference.cache
+C:\Users\adam\source\repos\szatyaadam\CookBook Project\Backend\cookbookAPI\CookBook.Models\obj\Debug\net6.0\CookBook.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\adam\source\repos\szatyaadam\CookBook Project\Backend\cookbookAPI\CookBook.Models\obj\Debug\net6.0\CookBook.Models.AssemblyInfoInputs.cache
+C:\Users\adam\source\repos\szatyaadam\CookBook Project\Backend\cookbookAPI\CookBook.Models\obj\Debug\net6.0\CookBook.Models.AssemblyInfo.cs
+C:\Users\adam\source\repos\szatyaadam\CookBook Project\Backend\cookbookAPI\CookBook.Models\obj\Debug\net6.0\CookBook.Models.csproj.CoreCompileInputs.cache
+C:\Users\adam\source\repos\szatyaadam\CookBook Project\Backend\cookbookAPI\CookBook.Models\obj\Debug\net6.0\CookBook.Models.dll
+C:\Users\adam\source\repos\szatyaadam\CookBook Project\Backend\cookbookAPI\CookBook.Models\obj\Debug\net6.0\refint\CookBook.Models.dll
+C:\Users\adam\source\repos\szatyaadam\CookBook Project\Backend\cookbookAPI\CookBook.Models\obj\Debug\net6.0\CookBook.Models.pdb
+C:\Users\adam\source\repos\szatyaadam\CookBook Project\Backend\cookbookAPI\CookBook.Models\obj\Debug\net6.0\ref\CookBook.Models.dll

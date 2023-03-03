@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vJxnJXN+80bspEVbG5/zQV6ISnsIr3j/19eBK3f5gXcRQ1syzwl1RKQ573ZcvqJbreeboN4RBYeqhtFGMidgBA==",
+  "dgSpecHash": "/5Q+NCK07E/IAEe6y8DToRHvUvQ0nJlcUXeoD87Jmm2Ldkq2shjT/kRhoyA0U9VuvBd7BcmJ8dIsKiVLKwQ6Mw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Backend\\ApiClient\\CookBook.ApiClient.csproj",
+  "projectFilePath": "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Backend\\ApiClient\\CookBook.ApiClient.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

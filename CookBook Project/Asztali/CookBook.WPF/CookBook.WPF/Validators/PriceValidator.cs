@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace CookBook.WPF.Validators
 {
-    public class ArValidator : ValidationRule
+    public class PriceValidator : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {

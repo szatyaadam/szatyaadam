@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tLJurL7bHwlSkw0i9BNACWPUkFg6X5tq1Tzd015HgZfSrALj+BHuPx5s6T7aaehJTRAQCvFF6L4agsxbQKMkzA==",
+  "dgSpecHash": "QgNFUUPWg1RmtLrthTgZ98fhUPxz2nCGv4PUgv3MSCD0O4Bkq3JUbihi5WBOa30j0LsXo+YPVlqEbEgYTs7kgg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Backend\\cookbookAPI\\CookBook.Models\\CookBook.Models.csproj",
+  "projectFilePath": "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Backend\\cookbookAPI\\CookBook.Models\\CookBook.Models.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\adam\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.11\\microsoft.entityframeworkcore.abstractions.6.0.11.nupkg.sha512",
     "C:\\Users\\adam\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",

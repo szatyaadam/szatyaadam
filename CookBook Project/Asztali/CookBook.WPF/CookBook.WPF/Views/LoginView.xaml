@@ -57,7 +57,7 @@
                                         Grid.ColumnSpan="2"
                                        >
                             </TextBlock>
-                            <Grid Name="signIn"  
+                            <Grid Name="signedIn"  
                                   Width="500"
                                   Panel.ZIndex="1"
                                   Height="396"
@@ -107,27 +107,7 @@
                                 </Button>
                             </Grid>
 
-                            <!--<TextBlock Name="signIn"
-                                        Text="You are signed in!"
-                                        TextAlignment="Center"
-                                       Margin="0,-400,0,10"
-                                       FontSize="20"
-                                       FontWeight="Bold"
-                                       Width="500"
-                                       Height="396"
-                                       Foreground="Black"
-                                      Background="#FFA19681"
-                                        Panel.ZIndex="1"
-                                        Grid.Row="6"
-                                          HorizontalAlignment="Center"
-                                           Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5"
-                                       Padding="0,200,0,0" > 
-                                       
-                                        
-                                     
-                              
-                            </TextBlock>-->
-                            <TextBlock              HorizontalAlignment="Center"
+                            <TextBlock          HorizontalAlignment="Center"
                                                 FontWeight="ExtraBlack"
                                                 FontSize="20"
                                                 Text="Username"
@@ -149,7 +129,9 @@
                             <Border CornerRadius="0,10,10,0" Background="White" Width="300"  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="-100,0,0,0"  >
 
 
-                                <TextBox    Name="UserName"
+                                <TextBox   
+                                            
+                                            x:Name="UserName"
                                             Margin="10 5"
                                             Padding="0 20 0 20" 
                                             SelectionBrush="White" 
@@ -158,7 +140,7 @@
                                             FontSize="20"
                                             GotMouseCapture="GetEmpty_Click"
                                             >
-
+                                    <Binding Path="SelectedUserName" UpdateSourceTrigger="PropertyChanged" ></Binding>
                                 </TextBox>
                             </Border>
 
@@ -179,7 +161,8 @@
                             </Border>
                             <Border CornerRadius="0,10,10,0" Background="White" Width="300"  Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" Margin="-100,0,0,0" >
                                 <PasswordBox 
-                                         Name="password"
+                                         
+                                         x:Name="password"
                                          Margin="10 5"
                                          Padding="0 20 0 20" 
                                          SelectionBrush="White" 

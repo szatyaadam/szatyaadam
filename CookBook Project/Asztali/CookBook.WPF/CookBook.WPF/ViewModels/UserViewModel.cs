@@ -24,7 +24,8 @@ namespace CookBook.WPF.ViewModels
             }
 
         }
-   
+
+
         private User  _selectedUser = new();
         public User SelectedUser
         {
@@ -48,7 +49,7 @@ namespace CookBook.WPF.ViewModels
         protected override async Task LoadData()
         {
             var users = await _userRepo.GetAllAsync(page, ItemsPerPage, SearchKey, SortKey, ascending);
-            Users = new ObservableCollection<User>(users.Data);
+            Users = new ObservableCollection<User>(users.Data); 
             TotalItems = users.TotalItems;
 
         }

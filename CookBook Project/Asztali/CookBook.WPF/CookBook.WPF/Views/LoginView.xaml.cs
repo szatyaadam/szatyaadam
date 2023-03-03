@@ -4,18 +4,20 @@ using System.Windows.Controls;
 using System.Data;
 using System.Text.RegularExpressions;
 using CookBook.WPF.ViewModels;
+using CookBook.Models.Models;
 
 namespace CookBook.WPF.Views
 {
     public partial class LoginView : UserControl
     {
-     
+      
         public LoginView() => InitializeComponent();
         public bool Authentication { get; set; }
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
             if (UserName.Text.Length == 0)
             {
+                
                 UserName.Text = "Enter the UserName.";
                 UserName.Select(0, UserName.Text.Length);
                 password.Clear();
@@ -33,7 +35,7 @@ namespace CookBook.WPF.Views
             {
                 Authentication = true;
                 Buttons.Visibility = Visibility.Hidden;
-                signIn.Visibility= Visibility.Visible;
+                signedIn.Visibility= Visibility.Visible;
             }
         }
    
@@ -58,7 +60,7 @@ namespace CookBook.WPF.Views
         {
             Authentication= false;
             Buttons.Visibility = Visibility.Visible;
-            signIn.Visibility = Visibility.Hidden;
+            signedIn.Visibility = Visibility.Hidden;
             wrongInput.Visibility = Visibility.Hidden;
             password.Clear();
             UserName.Clear();

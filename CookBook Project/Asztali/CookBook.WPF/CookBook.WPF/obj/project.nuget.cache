@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Tw8e51jBob+u3iN95euG75YGYJ5iTlcWLKyTsmfYNuTA3cBK69/rs1Ji0HoyIAsyFgCpfJIkOWd3j3+UIq4BlA==",
+  "dgSpecHash": "wFv2FMgQKaIGwC6HjN6k45ufU/W86vWZe5HBKRj2G291TT1miyX8M0hkdyQ2zyo8AuHy96M4i5JK5bt7fCKt1A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Asztali\\CookBook.WPF\\CookBook.WPF\\CookBook.WPF.csproj",
+  "projectFilePath": "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Asztali\\CookBook.WPF\\CookBook.WPF\\CookBook.WPF.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\adam\\.nuget\\packages\\communitytoolkit.mvvm\\8.1.0\\communitytoolkit.mvvm.8.1.0.nupkg.sha512",
     "C:\\Users\\adam\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.11\\microsoft.entityframeworkcore.abstractions.6.0.11.nupkg.sha512",

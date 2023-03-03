@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\adam\source\repos\receptek\Forráskód\Asztali\CookBook.WPF\CookBook.WPF\obj\Debug\net6.0-windows\
+C:\Users\adam\source\repos\szatyaadam\CookBook Project\Asztali\CookBook.WPF\CookBook.WPF\obj\Debug\net6.0-windows\
 CookBook.WPF
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\Users\adam\source\repos\receptek\Forráskód\Asztali\CookBook.WPF\CookBook.WPF\App.xaml
+C:\Users\adam\source\repos\szatyaadam\CookBook Project\Asztali\CookBook.WPF\CookBook.WPF\App.xaml
 7-1733547724
 
-14-324059998
-200-1709667816
+15-255163327
+200-1489674262
 Resources\DataTmpResource.xaml;Resources\ErrorTmpResource.xaml;Resources\Styles.xaml;Views\LoginView.xaml;Views\MainWindow.xaml;Views\MealsView.xaml;Views\UserView.xaml;
 
 False

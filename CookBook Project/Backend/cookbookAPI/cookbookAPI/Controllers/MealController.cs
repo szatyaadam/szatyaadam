@@ -1,6 +1,7 @@
 ﻿using CookBook.API.Controllers.DTO;
 using CookBook.API.Data;
 using CookBook.API.Services;
+using CookBook.ApiClient.Models;
 using CookBook.Models.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -157,30 +158,6 @@ namespace CookBook.API.Controllers
 
         }
 
-        //// az össze publikus recept lekérése 
-
-        //[AllowAnonymous]
-        //[HttpGet]
-        //[Route("All")]
-        //public async Task<ActionResult<List<MealDTO>>> GetAllMeals()
-        //{
-        //    var result = await context.Meals
-        //        .Include(x => x.MealType)
-        //        .Include(x => x.User)
-        //        .Include(x => x.Ingredients)
-        //        .ThenInclude(y => y.Materials)
-        //        .ThenInclude(z => z.UnitOfMeasure)
-        //        .Where(x => x.Privacy == 0)
-        //        .ToListAsync();
-
-        //    if (result.Count == 0)
-        //    {
-        //        return NotFound("Nem található étel az adatbázisban.");
-        //    }
-
-        //    return result.ToListMealsDTO();
-        //}
-
 
         /// <summary>
         /// Search meal with different parameters
@@ -189,7 +166,7 @@ namespace CookBook.API.Controllers
         /// <returns><see cref="MealDTO"/></returns>
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<List<Meal>>> SearchMeal(
+        public async Task<ActionResult<TableDTO<MealDTO>>> SearchMeal(
             string? search = null,
             string? mType = null,
             int page = 0,
@@ -212,7 +189,7 @@ namespace CookBook.API.Controllers
                 int.TryParse(search, out int price);
 
                 query = query
-                    .Where(x => x.Price.Equals(price)||
+                    .Where(x => x.Price.Equals(price) ||
                     x.MealName.Contains(search) ||
                     x.Ingredients.Select(x => x.Materials.IngredientName).Contains(search))
                     .OrderBy(x => x.Privacy == 0);
@@ -259,7 +236,7 @@ namespace CookBook.API.Controllers
 
             var result = await query.ToListAsync();
 
-            return Ok(result);
+            return new TableDTO<MealDTO>(count, result.ToListMealsDTO());
         }
 
         /// <summary>

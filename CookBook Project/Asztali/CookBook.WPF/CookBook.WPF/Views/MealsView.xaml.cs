@@ -11,6 +11,8 @@ namespace CookBook.WPF.Views
 {
     public partial class MealsView : UserControl
     {
+        
+
         public MealsView()=>InitializeComponent();
    
         private void DataGrid_Sorting(object sender, DataGridSortingEventArgs e)

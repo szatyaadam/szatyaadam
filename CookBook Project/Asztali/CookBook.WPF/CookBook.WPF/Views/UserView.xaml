@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <Label FontSize="24" HorizontalAlignment="Center" Grid.Row="0">Users</Label>
         
-        <Expander Grid.Row="1" Header="User részletei">
+        <Expander Grid.Row="1" Header="User details">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -49,24 +49,24 @@
 
 
               
-                <Button Content="Új" Grid.Row="0" Grid.Column="2" Command="{Binding NewCommand}"/>
-                <Button Content="Mentés" Grid.Row="1" Grid.Column="2" 
+                <Button Content="New" Grid.Row="0" Grid.Column="2" Command="{Binding NewCommand}"/>
+                <Button Content="Save" Grid.Row="1" Grid.Column="2" 
                         Command="{Binding SaveCommandAsync}" CommandParameter="{Binding SelectedUser}"/>
-                <Button Content="Törlés" Grid.Row="2" Grid.Column="2" 
+                <Button Content="Delete" Grid.Row="2" Grid.Column="2" 
                         Command="{Binding DeleteCommandAsync}" CommandParameter="{Binding SelectedUser}"/>
             </Grid>
         </Expander>
         
         <Grid Grid.Row="2">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="Összesen: "/>
+                <TextBlock Text="Total: "/>
                 <TextBlock Text="{Binding TotalItems}" />
-                <TextBlock Text=" elem, oldalankénti tételek: " />
+                <TextBlock Text=" items, per page: " />
                 <ComboBox Width="100" ItemsSource="{Binding ItemsPerPageList}" SelectedItem="{Binding ItemsPerPage}"/>
             </StackPanel>
             <StackPanel Margin="0,5,0,5" Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox Width="200" VerticalAlignment="Center" Text="{Binding SearchKey}"/>
-                <Button Content="Keresés" Command="{Binding LoadDataCommand}"/>
+                <Button Content="Search" Command="{Binding LoadDataCommand}"/>
             </StackPanel>
         </Grid>
         <ScrollViewer Grid.Row="3">

@@ -45,6 +45,10 @@ namespace CookBook.WPF
             {
                 return new PagerRepository<User>("api/User");
             });
+            //services.AddTransient<IGenericRepository<User>, GenericAPIRepository<User>>(x =>
+            //{
+            //    return new PagerRepository<User>("api/User");
+            //});
             // ViewModel, nézetmodel
             services.AddTransient<MealsViewModel>();
             services.AddTransient<UserViewModel>();

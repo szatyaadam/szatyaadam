@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xeMWVzFQ7asI0Z8PZpD8YbsEXTQRSR4gzWyUPCnXFZrXRcd9kOL2fd1vPYNp0Llhr9MWUrDC/vEqLhDTDoXYaw==",
+  "dgSpecHash": "mEdbetDa6CNABr6gPG3SchaS8xTnIOWTCUhedIOQ6Em9HBV+rABeehcIt/DflFltPxV1K26v2WJvWeTXObPExQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Backend\\JWTSecurity\\CookBook.JWTSecurity.csproj",
+  "projectFilePath": "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Backend\\JWTSecurity\\CookBook.JWTSecurity.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\adam\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.9\\microsoft.aspnetcore.authentication.jwtbearer.6.0.9.nupkg.sha512",
     "C:\\Users\\adam\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

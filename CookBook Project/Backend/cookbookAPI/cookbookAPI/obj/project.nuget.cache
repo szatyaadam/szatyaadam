@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "H6wAcTRi26aSeW53t9aMgtl/2bJwf14tNn+TzCOCbtRE2uekoO6KOheTw8TkQ/EpOzZUu0mnFfMb190fgf6auQ==",
+  "dgSpecHash": "AXPGnaOEJSb+OAs6jv8sBndwPFSt0tlEGtRc/rpi8i4MABjmcGEH8cKt9gWpx/7+4/cF1PxIGyuJpH5mYGmmNg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Backend\\cookbookAPI\\cookbookAPI\\CookBook.API.csproj",
+  "projectFilePath": "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Backend\\cookbookAPI\\cookbookAPI\\CookBook.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\adam\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\adam\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

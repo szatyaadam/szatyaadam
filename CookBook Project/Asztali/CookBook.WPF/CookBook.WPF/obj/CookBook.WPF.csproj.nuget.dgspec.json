@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Asztali\\CookBook.WPF\\CookBook.WPF\\CookBook.WPF.csproj": {}
+    "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Asztali\\CookBook.WPF\\CookBook.WPF\\CookBook.WPF.csproj": {}
   },
   "projects": {
-    "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Asztali\\CookBook.WPF\\CookBook.WPF\\CookBook.WPF.csproj": {
+    "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Asztali\\CookBook.WPF\\CookBook.WPF\\CookBook.WPF.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Asztali\\CookBook.WPF\\CookBook.WPF\\CookBook.WPF.csproj",
+        "projectUniqueName": "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Asztali\\CookBook.WPF\\CookBook.WPF\\CookBook.WPF.csproj",
         "projectName": "CookBook.WPF",
-        "projectPath": "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Asztali\\CookBook.WPF\\CookBook.WPF\\CookBook.WPF.csproj",
+        "projectPath": "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Asztali\\CookBook.WPF\\CookBook.WPF\\CookBook.WPF.csproj",
         "packagesPath": "C:\\Users\\adam\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Asztali\\CookBook.WPF\\CookBook.WPF\\obj\\",
+        "outputPath": "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Asztali\\CookBook.WPF\\CookBook.WPF\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,11 +33,11 @@
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
             "projectReferences": {
-              "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Backend\\ApiClient\\CookBook.ApiClient.csproj": {
-                "projectPath": "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Backend\\ApiClient\\CookBook.ApiClient.csproj"
+              "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Backend\\ApiClient\\CookBook.ApiClient.csproj": {
+                "projectPath": "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Backend\\ApiClient\\CookBook.ApiClient.csproj"
               },
-              "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Backend\\cookbookAPI\\CookBook.Models\\CookBook.Models.csproj": {
-                "projectPath": "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Backend\\cookbookAPI\\CookBook.Models\\CookBook.Models.csproj"
+              "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Backend\\cookbookAPI\\CookBook.Models\\CookBook.Models.csproj": {
+                "projectPath": "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Backend\\cookbookAPI\\CookBook.Models\\CookBook.Models.csproj"
               }
             }
           }
@@ -84,14 +84,14 @@
         }
       }
     },
-    "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Backend\\ApiClient\\CookBook.ApiClient.csproj": {
+    "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Backend\\ApiClient\\CookBook.ApiClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Backend\\ApiClient\\CookBook.ApiClient.csproj",
+        "projectUniqueName": "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Backend\\ApiClient\\CookBook.ApiClient.csproj",
         "projectName": "CookBook.ApiClient",
-        "projectPath": "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Backend\\ApiClient\\CookBook.ApiClient.csproj",
+        "projectPath": "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Backend\\ApiClient\\CookBook.ApiClient.csproj",
         "packagesPath": "C:\\Users\\adam\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Backend\\ApiClient\\obj\\",
+        "outputPath": "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Backend\\ApiClient\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -144,14 +144,14 @@
         }
       }
     },
-    "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Backend\\cookbookAPI\\CookBook.Models\\CookBook.Models.csproj": {
+    "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Backend\\cookbookAPI\\CookBook.Models\\CookBook.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Backend\\cookbookAPI\\CookBook.Models\\CookBook.Models.csproj",
+        "projectUniqueName": "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Backend\\cookbookAPI\\CookBook.Models\\CookBook.Models.csproj",
         "projectName": "CookBook.Models",
-        "projectPath": "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Backend\\cookbookAPI\\CookBook.Models\\CookBook.Models.csproj",
+        "projectPath": "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Backend\\cookbookAPI\\CookBook.Models\\CookBook.Models.csproj",
         "packagesPath": "C:\\Users\\adam\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\adam\\source\\repos\\receptek\\Forráskód\\Backend\\cookbookAPI\\CookBook.Models\\obj\\",
+        "outputPath": "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Backend\\cookbookAPI\\CookBook.Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
