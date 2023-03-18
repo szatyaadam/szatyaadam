@@ -81,19 +81,18 @@ namespace CookBook.API.Controllers
 
             if (oldUser == null)
                 return BadRequest("Nincs ilyen felhasználó ezzel az ID-val.");
-
-            if (oldUser.RoleId == 1)
+            var actual = UserService.GetUserId(User);
+         
+            if (oldUser.Id != actual&&oldUser.RoleId == 1)//módosítottam hogy saját magát módosíthatja az admin,
                 return Conflict("Nincs jogosultságod felülírni másik admint.");
 
             //UserService swapolja a beadott userek propertieit
             oldUser = UserService.SwapUser(oldUser, user);
-
-            //létezik e már a megadott username és email
-            User? ExistEmailOrName = await _context.Users
-                .FirstOrDefaultAsync(user => user.UserName.Equals(oldUser.UserName) || 
-                                     user.Email.Equals(oldUser.Email));
-
-            if (ExistEmailOrName != null)
+        
+            var ExistEmailOrName = await _context.Users
+                .Where(user => user.UserName.Equals(oldUser.UserName) ||
+                                     user.Email.Equals(oldUser.Email)).ToListAsync();
+            if (ExistEmailOrName.Count>=2)
             {
                 return BadRequest("Ez a felhasználó név vagy email már foglalt.");
             }
@@ -104,7 +103,7 @@ namespace CookBook.API.Controllers
             {
                 await _context.SaveChangesAsync();
                 return Ok("Sikeresen frissítetted a felhasználót.");
-            }
+            } 
             catch (DbUpdateConcurrencyException)
             {
                 throw new Exception("A felhasználót nem sikerült frissíteni.");

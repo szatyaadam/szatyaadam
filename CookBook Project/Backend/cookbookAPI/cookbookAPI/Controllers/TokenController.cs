@@ -23,6 +23,7 @@ namespace CookBook.Models.Controllers
             _jwtManagerService = jwtManagerService;
         }
 
+
         [AllowAnonymous]
         [HttpPost("Login")]
         public async Task<ActionResult<LoginDTO>> Login(UserLogin userLogin)
@@ -38,7 +39,7 @@ namespace CookBook.Models.Controllers
             }
             //Jelszó ellenőrzése
             if (!BCrypt.Net.BCrypt.Verify(userLogin.Password, dbUser.Password))
-            {
+            {//Itt a megadott jelszó ha nem frissítem adatbázisban a Hasselt jelszót hiába eggyezik meg a jelszó nem fogadja el . WPF-ben
                 return Unauthorized("Hibás jelszó.");
             }
 
@@ -48,8 +49,8 @@ namespace CookBook.Models.Controllers
                 .Where(y => y.UserId == dbUser.Id)
                 .ToListAsync();
 
-            if (oldTokens != null) 
-            { 
+            if (oldTokens != null)
+            {
                 foreach (var oldToken in oldTokens)
                 {
                     _context.Tokens.Remove(oldToken);
@@ -64,7 +65,7 @@ namespace CookBook.Models.Controllers
             _context.Tokens.Add(new Token(jwtToken.Refresh_Token, dbUser.Id));
             await _context.SaveChangesAsync();
             // Felhasználói adatok és token visszaadása
-            return new LoginDTO(dbUser.Id, dbUser.UserName, dbUser.Password , dbUser.Role.RoleName, jwtToken);
+            return new LoginDTO(dbUser.Id, dbUser.UserName, dbUser.Password, dbUser.Role.RoleName, jwtToken);
         }
 
         [AllowAnonymous]

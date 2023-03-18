@@ -1,4 +1,6 @@
 ﻿using CookBook.ApiClient.Models;
+using CookBook.ApiClient.Models.DTO;
+using System.Text.Json;
 
 namespace CookBook.ApiClient.Repositories
 {
@@ -9,6 +11,9 @@ namespace CookBook.ApiClient.Repositories
             int itemsPerPage = 0,
             string? search = null,
             string? sortBy = null,
-            bool ascending = true);
+            bool ascending = true,
+            JwtToken actual = null
+
+            );
     }
 }

@@ -7,7 +7,7 @@ namespace CookBook.WPF.Commands
 {
     public interface IEditCommand<T>
     {
-        IRelayCommand NewCommand { get; set; }
+        IRelayCommand? NewCommand { get; set; }
         IAsyncRelayCommand<T> SaveCommandAsync { get; set; }
         IAsyncRelayCommand<T> DeleteCommandAsync { get; set; }
     }

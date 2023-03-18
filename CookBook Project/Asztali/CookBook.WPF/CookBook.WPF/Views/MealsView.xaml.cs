@@ -1,8 +1,5 @@
 ﻿using CookBook.WPF.ViewModels;
-
 using System.ComponentModel;
-using System.Data;
-using System.Printing;
 using System.Windows;
 using System.Windows.Controls;
 

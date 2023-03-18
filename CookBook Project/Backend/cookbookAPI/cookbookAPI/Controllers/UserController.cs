@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CookBook.Models.Models;
-using CookBook.ApiClient.Models;
+using CookBook.ApiClient.Models.DTO;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace CookBook.API.Controllers
 {
@@ -21,6 +22,66 @@ namespace CookBook.API.Controllers
         {
             _context = cookbookContext;
         }
+        //ez a User viewModellhez kell. 
+   
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<TableDTO<User>>> GetAll(
+            string? search = null,
+            int page = 0,
+            int itemsPerPage = 0,
+            string? sortBy = null,
+            bool ascending = true)
+        {
+                var query = _context.Users
+                    .AsQueryable();
+
+            var user = await _context.Users
+                    .Include(role => role.Role)
+                    .ToListAsync();
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+              
+
+                query = query
+                    .Where(x => x.UserName.Contains(search) ||
+                    x.Email.Contains(search) 
+                    );
+            }
+            if (!string.IsNullOrWhiteSpace(sortBy))
+            {
+                switch (sortBy)
+                {
+                    case "UserName":
+                        query = ascending ? query.OrderBy(x => x.UserName) : query.OrderByDescending(x => x.UserName);
+                        break;
+                    case "Email":
+                        query = ascending ? query.OrderBy(x => x.Email) : query.OrderByDescending(x => x.Email);
+                        break;
+                    case "RoleId":
+                        query = ascending ? query.OrderBy(x => x.RoleId) : query.OrderByDescending(x => x.RoleId);
+                        break;
+               
+                    default:
+                        break;
+                }
+            }
+            //összes kiválasztott elem db
+            int count = await query.CountAsync();
+
+            // Oldaltördelés
+            if (page > 0 && itemsPerPage > 0)
+            {
+                query = query.Skip((page - 1) * itemsPerPage).Take(itemsPerPage);
+            }
+
+            var result = await query.ToListAsync();
+
+            return new TableDTO<User>(count, result);
+        }
+
+
+
 
         /// <summary>
         /// Get actual <see cref="User"/> profile
@@ -43,54 +104,6 @@ namespace CookBook.API.Controllers
                 .FirstOrDefaultAsync(x => x.Id == UserService.GetUserId(User));
 
             return Ok(actualUser.ToUserWithMealsAndFavoritesDTO());
-        }
-        //ez a User viewModellhez kell. 
-        //TODO Authorizálni kell csak kezdésnek változtattam rajta hogy megjelenítsen adatot .
-        [AllowAnonymous]
-        [HttpGet]
-        public async Task<ActionResult<TableDTO<User>>> GetAll(string? search = null,
-            string? mType = null,
-            int page = 0,
-            int itemsPerPage = 0,
-            string? sortBy = null,
-            bool ascending = true)
-        {
-            var query = _context.Users
-                .AsQueryable();
-
-            var user = await _context.Users
-                    .Include(role => role.Role)
-                    .ToListAsync();
-            if (!string.IsNullOrWhiteSpace(sortBy))
-            {
-                switch (sortBy)
-                {
-                    case "UserName":
-                        query = ascending ? query.OrderBy(x => x.UserName) : query.OrderByDescending(x => x.UserName);
-                        break;
-                    case "Email":
-                        query = ascending ? query.OrderBy(x => x.Email) : query.OrderByDescending(x => x.Email);
-                        break;
-                    case "RoleId":
-                        query = ascending ? query.OrderBy(x => x.RoleId) : query.OrderByDescending(x => x.RoleId);
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-            //összes kiválasztott elem db
-            int count = await query.CountAsync();
-
-            // Oldaltördelés
-            if (page > 0 && itemsPerPage > 0)
-            {
-                query = query.Skip((page - 1) * itemsPerPage).Take(itemsPerPage);
-            }
-
-            var result = await query.ToListAsync();
-
-            return new TableDTO<User>(count, result);
         }
 
         /// <summary>

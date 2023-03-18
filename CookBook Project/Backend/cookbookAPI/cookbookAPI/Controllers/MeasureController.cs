@@ -24,5 +24,12 @@ namespace cookbookAPI.Controllers
         {
             return await context.Meassures.ToListAsync();
         }
+        [AllowAnonymous]
+        [HttpGet]
+    
+        public async Task<ActionResult<IEnumerable<Measures>>> GetMeassures()
+        {
+            return await context.Meassures.ToListAsync();
+        }
     }
 }

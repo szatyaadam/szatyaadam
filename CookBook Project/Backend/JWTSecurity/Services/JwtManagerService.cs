@@ -31,7 +31,7 @@ namespace CookBook.JWTSecurity.Services
                         _configuration["Jwt:Issuer"],
                         _configuration["Jwt:Audience"],
                         claims,
-                        expires: DateTime.UtcNow.AddMinutes(1),
+                        expires: DateTime.UtcNow.AddMinutes(20),
 
                         signingCredentials: signIn);
             var accessToken = new JwtSecurityTokenHandler().WriteToken(token);

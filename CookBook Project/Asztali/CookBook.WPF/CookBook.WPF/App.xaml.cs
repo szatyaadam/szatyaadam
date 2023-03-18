@@ -1,4 +1,5 @@
-﻿using CookBook.ApiClient.Repositories;
+﻿using CookBook.ApiClient.Models;
+using CookBook.ApiClient.Repositories;
 using CookBook.Models.Models;
 using CookBook.WPF.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +17,10 @@ namespace CookBook.WPF
         {
             Services = ConfigureServices();
             this.InitializeComponent();
+         
         }
+        public static ActualUser currentUser { get; set;}
+
         public new static App Current => (App)Application.Current;
 
         /// <summary>
@@ -45,10 +49,13 @@ namespace CookBook.WPF
             {
                 return new PagerRepository<User>("api/User");
             });
-            //services.AddTransient<IGenericRepository<User>, GenericAPIRepository<User>>(x =>
-            //{
-            //    return new PagerRepository<User>("api/User");
-            //});
+            services.AddTransient<IGenericRepository<User>, GenericAPIRepository<User>>(x =>
+            {
+                return new GenericAPIRepository<User>("api/Token");
+            });
+       
+
+
             // ViewModel, nézetmodel
             services.AddTransient<MealsViewModel>();
             services.AddTransient<UserViewModel>();

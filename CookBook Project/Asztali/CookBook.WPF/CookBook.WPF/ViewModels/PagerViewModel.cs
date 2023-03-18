@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CookBook.ApiClient.Models;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -7,7 +8,8 @@ namespace CookBook.WPF.ViewModels
 {
     public abstract class PagerViewModel : ObservableObject
     {
-		private string? _searchKey;
+		
+        private string? _searchKey;
 		public string? SearchKey
 		{
 			get { return _searchKey; }
@@ -74,6 +76,8 @@ namespace CookBook.WPF.ViewModels
 		}
         #endregion
 
+
+       
         public IRelayCommand FirstPageCommand { get; set; }
 		public IRelayCommand PreviousPageCommand { get; set; }
 		public IRelayCommand NextPageCommand { get; set; }
@@ -82,7 +86,8 @@ namespace CookBook.WPF.ViewModels
 
         public PagerViewModel()
 		{
-			ascending = true;
+			
+            ascending = true;
 			LoadDataCommand = new RelayCommand(() => LoadData());
 			FirstPageCommand = new RelayCommand(FirstPage);
 			PreviousPageCommand = new RelayCommand(PreviousPage);

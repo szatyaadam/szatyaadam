@@ -1,0 +1,24 @@
+:root{
+    --bg-color:#f9e6be;
+    --nav-bg-color:#383e429c;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.error{
+  color: red;
+  text-shadow: 0 0 5px white;
+}
+
+.success{
+  color: green;
+  text-shadow: 0 0 10px whitesmoke;
+}
+

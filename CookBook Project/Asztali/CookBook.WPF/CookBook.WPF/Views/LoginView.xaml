@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
+             mc:Ignorable="d"
         Background="Wheat"
         >
 
@@ -11,7 +11,6 @@
 
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
-
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -57,7 +56,8 @@
                                         Grid.ColumnSpan="2"
                                        >
                             </TextBlock>
-                            <Grid Name="signedIn"  
+                            <Grid 
+                                  Name="signedIn"  
                                   Width="500"
                                   Panel.ZIndex="1"
                                   Height="396"
@@ -66,10 +66,11 @@
                                   Grid.ColumnSpan="2"
                                   Margin="0,-400,0,10"
                                   Visibility="Hidden"
+                              
                                     >
                                 <TextBlock 
                                         Padding="20,180,20,20"
-                                        Text="You are signed in!"
+                                        Text="{Binding ErrorMessages ,UpdateSourceTrigger=PropertyChanged}"
                                         TextAlignment="Center"
                                    
                                        FontSize="20"
@@ -91,7 +92,7 @@
                                             Foreground="White"
                                             Content="Log out"
                                             Padding="2,2,2,0 "
-                                             
+                                            
                                             
                              >
 
@@ -130,20 +131,21 @@
 
 
                                 <TextBox   
-                                            
-                                            x:Name="UserName"
+                                           
+                                           x:Name="UserName"
                                             Margin="10 5"
                                             Padding="0 20 0 20" 
                                             SelectionBrush="White" 
                                             Foreground="Black" 
                                             BorderBrush="White" 
                                             FontSize="20"
-                                            GotMouseCapture="GetEmpty_Click"
+                                            Text="{Binding Username}"
                                             >
-                                    <Binding Path="SelectedUserName" UpdateSourceTrigger="PropertyChanged" ></Binding>
+                                   
                                 </TextBox>
-                            </Border>
 
+                
+                            </Border>
                             <TextBlock              HorizontalAlignment="Center"
                                                 FontWeight="ExtraBlack"
                                                 FontSize="20"
@@ -151,6 +153,7 @@
                                                 Grid.Row="3" 
                                                 Grid.ColumnSpan="2">
 
+                           
                             </TextBlock>
                             <Border Grid.Row="4" Background="White" CornerRadius="10,0,0,10" Width="100" HorizontalAlignment="Right" Padding="5,0,20,0" Margin="0,0,100,0"  >
                                 <TextBlock  Grid.Row="4" >
@@ -159,19 +162,24 @@
                                     </TextBlock.Background>
                                  </TextBlock>
                             </Border>
+                          
                             <Border CornerRadius="0,10,10,0" Background="White" Width="300"  Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" Margin="-100,0,0,0" >
                                 <PasswordBox 
                                          
-                                         x:Name="password"
+                                         x:Name="password" 
+                                         PasswordChar="*"
                                          Margin="10 5"
                                          Padding="0 20 0 20" 
                                          SelectionBrush="White" 
                                          Foreground="Black" 
                                          BorderBrush="White"
-                                         FontSize="20"
-                                       
-                                         >
+                                         FontSize="20">
+                                    <PasswordBox.InputBindings>
+                                        <KeyBinding Key="Return" Command="{Binding LoginCommand}" />
+                                    </PasswordBox.InputBindings>
                                 </PasswordBox>
+                             
+
                             </Border>
                             <TextBlock Name="wrongInput"
                                         Grid.Row="5"
@@ -198,7 +206,7 @@
                                         Grid.ColumnSpan="2"
                                         Visibility="Visible">
 
-                                <Button Margin="10 20"
+                                <!--<Button Margin="10 20"
                                             Width="90"
                                             FontWeight="Bold"
                                             FontSize="20"
@@ -215,19 +223,20 @@
                                                              Opacity="0.9"
                                              />
                                     </Button.Background>
-                                </Button>
+                                </Button>-->
 
                                 <Button Margin="10 20"
                                             Width="90"
                                             FontWeight="Bold"
                                             FontSize="20"
-                                        
+                                            Command="{Binding LoginCommand}"
                                             BorderThickness="0,0,0,0"
                                             Foreground="White"
                                             Content="Login"
                                             Name="button1"
-                                             Click="Button1_Click"
-                                            
+                                            Click="PasswordBox_PasswordChanged"
+                                        
+                                             
                              >
 
                                     <Button.Effect>

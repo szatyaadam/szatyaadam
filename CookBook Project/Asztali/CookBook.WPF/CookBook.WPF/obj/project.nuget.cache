@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "wFv2FMgQKaIGwC6HjN6k45ufU/W86vWZe5HBKRj2G291TT1miyX8M0hkdyQ2zyo8AuHy96M4i5JK5bt7fCKt1A==",
+  "dgSpecHash": "7pzj9f9WHsRpz7MYVFgIzgcEVxlDkGR7x9hrhtS9X0zpPqkOe4UkwqDWwljDjMe643FcI7ALNKkgclnhXyCxtw==",
   "success": true,
   "projectFilePath": "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Asztali\\CookBook.WPF\\CookBook.WPF\\CookBook.WPF.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\adam\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\adam\\.nuget\\packages\\communitytoolkit.mvvm\\8.1.0\\communitytoolkit.mvvm.8.1.0.nupkg.sha512",
     "C:\\Users\\adam\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.11\\microsoft.entityframeworkcore.abstractions.6.0.11.nupkg.sha512",
     "C:\\Users\\adam\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\6.0.1\\microsoft.extensions.dependencyinjection.6.0.1.nupkg.sha512",

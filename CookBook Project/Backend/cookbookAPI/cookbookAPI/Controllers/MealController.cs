@@ -1,7 +1,7 @@
 ﻿using CookBook.API.Controllers.DTO;
 using CookBook.API.Data;
 using CookBook.API.Services;
-using CookBook.ApiClient.Models;
+using CookBook.ApiClient.Models.DTO;
 using CookBook.Models.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -189,7 +189,7 @@ namespace CookBook.API.Controllers
                 int.TryParse(search, out int price);
 
                 query = query
-                    .Where(x => x.Price.Equals(price) ||
+                    .Where(x => x.Price.Equals(price)||
                     x.MealName.Contains(search) ||
                     x.Ingredients.Select(x => x.Materials.IngredientName).Contains(search))
                     .OrderBy(x => x.Privacy == 0);
@@ -238,14 +238,92 @@ namespace CookBook.API.Controllers
 
             return new TableDTO<MealDTO>(count, result.ToListMealsDTO());
         }
+        ///// <summary>
+        ///// Search meal with different parameters
+        ///// </summary>
+        ///// <param name="search"></param>
+        ///// <returns><see cref="MealDTO"/></returns>
+        //[AllowAnonymous]
+        //[HttpGet]
+        //public async Task<ActionResult<List<Meal>>> SearchMeal(
+        //    string? search = null,
+        //    string? mType = null,
+        //    int page = 0,
+        //    int itemsPerPage = 0,
+        //    string? sortBy = null,
+        //    bool ascending = true)
+        //{
 
+        //    var query = context.Meals
+        //        .Include(x => x.MealType)
+        //        .Include(x => x.User)
+        //        .Include(x => x.Ingredients)
+        //        .ThenInclude(y => y.Materials)
+        //        .ThenInclude(z => z.UnitOfMeasure)
+        //        .Where(x => x.Privacy == 0)
+        //        .AsQueryable();
+
+        //    if (!string.IsNullOrWhiteSpace(search))
+        //    {
+        //        int.TryParse(search, out int price);
+
+        //        query = query
+        //            .Where(x => x.Price.Equals(price) ||
+        //            x.MealName.Contains(search) ||
+        //            x.Ingredients.Select(x => x.Materials.IngredientName).Contains(search))
+        //            .OrderBy(x => x.Privacy == 0);
+        //    }
+
+        //    if (!string.IsNullOrWhiteSpace(mType))
+        //    {
+        //        query = query.Where(x => x.MealType.MealTypeName.Contains(mType));
+        //    }
+
+        //    if (!string.IsNullOrWhiteSpace(sortBy))
+        //    {
+        //        switch (sortBy)
+        //        {
+        //            case "MealName":
+        //                query = ascending ? query.OrderBy(x => x.MealName) : query.OrderByDescending(x => x.MealName);
+        //                break;
+        //            case "MealType":
+        //                query = ascending ? query.OrderBy(x => x.MealType) : query.OrderByDescending(x => x.MealType);
+        //                break;
+        //            case "Price":
+        //                query = ascending ? query.OrderBy(x => x.Price) : query.OrderByDescending(x => x.Price);
+        //                break;
+        //            case "Ingredients.Material.IngredientName":
+        //                query = ascending ? query.OrderBy(x => x.Ingredients.OrderBy(y => y.Materials.IngredientName)) :
+        //                                    query.OrderByDescending(x => x.Ingredients.OrderBy(y => y.Materials.IngredientName));
+        //                break;
+        //            case "PreperationTime":
+        //                query = ascending ? query.OrderBy(x => x.PreperationTime) : query.OrderByDescending(x => x.PreperationTime);
+        //                break;
+        //            default:
+        //                break;
+        //        }
+        //    }
+
+        //    //összes kiválasztott elem db
+        //    int count = await query.CountAsync();
+
+        //    // Oldaltördelés
+        //    if (page > 0 && itemsPerPage > 0)
+        //    {
+        //        query = query.Skip((page - 1) * itemsPerPage).Take(itemsPerPage);
+        //    }
+
+        //    var result = await query.ToListAsync();
+
+        //    return Ok(result);
+        //}
         /// <summary>
         /// The admin or the user who crate the recept can only modify it .
         /// </summary>
         /// <param name="newRecept"></param>
         /// <returns></returns>
         [Authorize]
-        [HttpPost]
+        [HttpPut]
         [Route("modify")]
         public async Task<ActionResult<Meal>> ModifyMeals(Meal newRecept)
         {
@@ -254,14 +332,35 @@ namespace CookBook.API.Controllers
             try
             {
 
-                Meal recept = await context.Meals.FirstOrDefaultAsync(x => x.Id == newRecept.Id);
+                Meal recept = await context.Meals.Include(x=>x.MealType).FirstOrDefaultAsync(x => x.Id == newRecept.Id);
                 if (recept.UserId != UserService.GetUserId(User) && UserRole(UserService.GetUserId(User)) != 1) return BadRequest("Ön nem jogosult módosítani ezt a receptet.");
                 if (newRecept.MealName != null) recept.MealName = newRecept.MealName;
                 if (newRecept.PreperationTime != null) recept.PreperationTime = newRecept.PreperationTime;
                 if (newRecept.Price != null) recept.Price = newRecept.Price;
                 if (newRecept.Photo != null) recept.Photo = newRecept.Photo;
                 if (newRecept.Discription != null) recept.Discription = newRecept.Discription;
+                if (newRecept.MealType.MealTypeName != null)
+                { 
 
+                   Mealtype? mealtype = await context.Mealtypes.FirstOrDefaultAsync(x => x.MealTypeName == newRecept.MealType.MealTypeName);
+                    Mealtype newMealtype = new Mealtype();
+                    if (mealtype == null)
+                    {
+                        
+                        newMealtype.MealTypeName = newRecept.MealType.MealTypeName;
+                        context.Mealtypes.Add(newMealtype);
+                        context.SaveChanges();
+                        recept.MealType = newMealtype;
+                        recept.MealTypeId = newMealtype.Id;
+                    }
+                    else
+                    {
+                        recept.MealType = mealtype;
+                        recept.MealTypeId = mealtype.Id;
+                    }
+                    
+                    
+                }
 
                 context.Meals.Update(recept);
                 context.SaveChanges();
@@ -277,6 +376,20 @@ namespace CookBook.API.Controllers
 
             var search = context.Users.FirstOrDefault(x => x.Id == id);
             return search.RoleId;
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("id")]
+        public ActionResult<MealDTO> SearchByID(int id)
+        {
+            var search = context.Meals.FirstOrDefault(x => x.Id == id);
+            if (search!=null)
+            {
+            return search.ToMealDTO();
+
+            }
+            else { return NotFound(); } 
         }
     }
 }

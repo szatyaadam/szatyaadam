@@ -1,7 +1,9 @@
-﻿namespace CookBook.ApiClient.Repositories
+﻿using CookBook.ApiClient.Models;
+namespace CookBook.ApiClient.Repositories
 {
     public interface IGenericRepository<T>
     {
+        Task<ActualUser> GetLoginAsync(UserLogins log);
         /// <summary>
         /// Lekérdezi az összes elemet
         /// </summary>
@@ -18,24 +20,24 @@
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<bool> ExistsByIdAsync(int id);
+        Task<bool> ExistsByIdAsync(int id,JwtToken actual=null);
         /// <summary>
         /// Beilleszt egy új elemet
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task InsertAsync(T entity);
+        Task InsertAsync(T entity,JwtToken actual);
         /// <summary>
         /// Módosít egy meglévő elemet azonosító alapján
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task UpdateAsync(int id, T entity);
+        Task UpdateAsync( T entity, JwtToken actual);
         /// <summary>
         /// Törli a megadott elemet azonosító alapján
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task DeleteAsync(int id);
+        Task DeleteAsync(int id, JwtToken actual);
     }
 }

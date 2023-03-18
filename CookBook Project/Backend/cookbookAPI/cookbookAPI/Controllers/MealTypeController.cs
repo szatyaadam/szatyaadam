@@ -1,4 +1,5 @@
 ﻿using CookBook.API.Data;
+using CookBook.ApiClient.Models.DTO;
 using CookBook.Models.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,16 @@ namespace CookBook.API.Controllers
  
             var mealtype = await context.Mealtypes.Where(x =>x.MealTypeName!=null).ToListAsync();
             return mealtype;
+        }
+
+        //WPF hez kell .
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Mealtype>>> AllMealType()
+        {
+
+            return await context.Mealtypes.Where(x => x.MealTypeName != null).ToListAsync();
+           
         }
     }
 }

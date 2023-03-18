@@ -24,6 +24,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
        
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -33,7 +34,10 @@
                 </Grid.ColumnDefinitions>
                 <Label Content="UserName" Grid.Row="0" Grid.Column="0"/>
                 <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedUser.UserName}"/>
-                <Label Content="Email" Grid.Row="1" Grid.Column="0"/>
+                <Label Content="Email" Grid.Row="1" Grid.Column="0"/>      
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedUser.Email}"/>
+                <Label Content="Password" Grid.Row="3" Grid.Column="0"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedUser.Password}"/>
                 <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtemail"
                          Validation.ErrorTemplate="{StaticResource validationTemplate}">
                     <TextBox.Text>
@@ -47,12 +51,9 @@
                 <Label Content="RoleId" Grid.Row="2" Grid.Column="0"/>
                 <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedUser.RoleId}"/>
 
-
-              
-                <Button Content="New" Grid.Row="0" Grid.Column="2" Command="{Binding NewCommand}"/>
-                <Button Content="Save" Grid.Row="1" Grid.Column="2" 
+                <Button Content="Save" Grid.Row="0" Grid.Column="2" 
                         Command="{Binding SaveCommandAsync}" CommandParameter="{Binding SelectedUser}"/>
-                <Button Content="Delete" Grid.Row="2" Grid.Column="2" 
+                <Button Content="Delete" Grid.Row="1" Grid.Column="2" 
                         Command="{Binding DeleteCommandAsync}" CommandParameter="{Binding SelectedUser}"/>
             </Grid>
         </Expander>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CookBook.ApiClient.Models
+namespace CookBook.ApiClient.Models.DTO
 {
     public class TableDTO<T>
     {
@@ -18,4 +18,5 @@ namespace CookBook.ApiClient.Models
 
         public List<T>? Data { get; set; }
     }
+
 }
