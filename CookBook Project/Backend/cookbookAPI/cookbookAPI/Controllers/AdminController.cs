@@ -71,7 +71,7 @@ namespace CookBook.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <param name="user"></param>
-        //Itt szerintem le kellene kezelni ha már van olyan felhasználó amire módosítani akarom akkor azt kiirja hogy van már ilyen . 
+     
         [HttpPut]
         [Authorize(Roles = "Admin")]
         [Route("user/modify")]
@@ -83,7 +83,7 @@ namespace CookBook.API.Controllers
                 return BadRequest("Nincs ilyen felhasználó ezzel az ID-val.");
             var actual = UserService.GetUserId(User);
          
-            if (oldUser.Id != actual&&oldUser.RoleId == 1)//módosítottam hogy saját magát módosíthatja az admin,
+            if (oldUser.Id != actual&&oldUser.RoleId == 1)
                 return Conflict("Nincs jogosultságod felülírni másik admint.");
 
             //UserService swapolja a beadott userek propertieit
@@ -109,6 +109,7 @@ namespace CookBook.API.Controllers
                 throw new Exception("A felhasználót nem sikerült frissíteni.");
             }
         }
+        //TODO: nem sikeres módosítás esetén kijelezze a problémát
 
         [HttpDelete]
         [Authorize(Roles = "Admin")]

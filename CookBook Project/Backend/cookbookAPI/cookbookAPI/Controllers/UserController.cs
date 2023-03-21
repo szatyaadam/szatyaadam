@@ -22,7 +22,7 @@ namespace CookBook.API.Controllers
         {
             _context = cookbookContext;
         }
-        //ez a User viewModellhez kell. 
+
    
         [Authorize]
         [HttpGet]

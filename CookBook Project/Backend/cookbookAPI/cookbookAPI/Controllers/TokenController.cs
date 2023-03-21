@@ -39,7 +39,7 @@ namespace CookBook.Models.Controllers
             }
             //Jelszó ellenőrzése
             if (!BCrypt.Net.BCrypt.Verify(userLogin.Password, dbUser.Password))
-            {//Itt a megadott jelszó ha nem frissítem adatbázisban a Hasselt jelszót hiába eggyezik meg a jelszó nem fogadja el . WPF-ben
+            {
                 return Unauthorized("Hibás jelszó.");
             }
 
