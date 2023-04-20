@@ -2326,6 +2326,9 @@
         }
       },
       "CookBook.ApiClient/1.0.0": {
+        "dependencies": {
+          "CookBook.Models": "1.0.0"
+        },
         "runtime": {
           "CookBook.ApiClient.dll": {}
         }

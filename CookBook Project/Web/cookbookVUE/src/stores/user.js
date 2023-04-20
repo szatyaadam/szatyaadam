@@ -1,142 +1,197 @@
 import { defineStore } from "pinia";
+import { ref, watch } from "vue";
+import base from "../service/urlBase";
 import axios from "axios";
-import { reactive, onBeforeMount, ref } from "vue";
-import base from "../service/base";
+import urlBase from "../service/urlBase";
+import { useRouter } from "vue-router";
 
 export const useUserStore = defineStore("user", () => {
-  const user = reactive({
+  const router = useRouter();
+  //felhasználó adatai
+  const user = ref({
     loggedIn: false,
-    userName: '',
-    email: '',
-    meals: [],
-    favorites: [],
+    userName: "",
+    email: "",
+    meals: new Set(),
+    favorites: new Set(),
   });
-  
-  const collapsUser = ref(true)
+  //notify the user by popup
+  const popupMessage = ref('');
+  const popupMessageStack = ref([])
+  watch(popupMessageStack.value, () => {
+    popupMessageStack.value.forEach((message, index) => {
+      setTimeout(() => {
+        popupMessage.value = message
+        setTimeout(() => {
+          popupMessageStack.value.shift()
+        },2000)
+      }, 2000 * index);
+      setTimeout(() => {
+        popupMessage.value = ''
+      }, 2000 * popupMessageStack.value.length + 1)
+    })
+  })    
+    const createPopupMessage = (message) => {
+      popupMessageStack.value.push(message)
+  }
   //notify the user
-  const notifyMessage = ref ('')
-  const createNotifyMessage =(message) => {
-    notifyMessage.value = message
-
-    setInterval(() => {
-      notifyMessage.value = ''
-    },6000)
-  }
+  const notifyMessage = ref("");
+  const createNotifyMessage = (message) => {
+    notifyMessage.value = message;
+    setTimeout(() => {
+      notifyMessage.value = "";
+    }, 6000);
+  };
   //error message to user
-  const errorMessage = ref('')
+  const errorMessage = ref("");
   const createErrorMessage = (message) => {
-    errorMessage.value = message
-
-    setInterval(() => {
-      errorMessage.value = ''
-    },6000)
-  }
-  
-  onBeforeMount(() => {
-    const accessToken = JSON.parse(sessionStorage.getItem("accessToken"));
-    const refreshToken = JSON.parse(sessionStorage.getItem("refreshToken"));
-    if (accessToken != null && refreshToken != null) {
-      console.log("stayLOGIN")
-      stayLogin(accessToken, refreshToken)
-    }
-  });
+    errorMessage.value = message;
+    setTimeout(() => {
+      errorMessage.value = "";
+    }, 6000);
+  };
   //USER PROFILE
-  function getUserProfile() {
-    axios(base.userUrl + "/profile", config())
+  async function getUserProfile() {
+    await axios(base.userUrl + "/profile", configHeader())
       .then((res) => {
-        const profile = res.data
-        user.userName = profile.userName;
-        user.email = profile.email;
-        profile.favorites.forEach((element) => {
-          user.favorites.push(element);
-        });
-        profile.meals.forEach((element) => {
-          user.meals.push(element);
-        });
-      })
-      .catch((err) => {
-        user.loggedIn = false;
-        console.log(err.message);
-      });
-  }
-  //BEJELENTKEZÉS
-  function login(el) {
-    let user = JSON.parse(JSON.stringify(el));
-    axios
-      .post(base.tokenUrl + "/login", user)
-      .then((res) => {
-        let accessToken = JSON.stringify(res.data.access_Token);
-        let refreshToken = JSON.stringify(res.data.refresh_Token);
-        sessionStorage.setItem("accessToken", accessToken);
-        sessionStorage.setItem("refreshToken", refreshToken);
-        this.user.loggedIn = true;
-        //Sikeres belépés után átirányítom a kezdő képernyőre
-        location.replace("/")
-      })
-      .catch((err) => {
-        // console.log(err.response.data)
-        if(err.response){
-          createErrorMessage(err.response.data);
+        let profile = res.data;
+        user.value.userName = profile.userName;
+        user.value.email = profile.email;
+        for (const meal of profile.meals) {
+          user.value.meals.add(meal);
         }
+        return profile.favorites;
+      })
+      .then((favorites) => {
+        const requests = favorites.map((favorite) =>
+          axios(urlBase.mealUrl + "/" + favorite.mealsId)
+        );
+
+        axios.all(requests).then((res) => {
+          for (let index = 0; index < res.length; index++) {
+            //CREATE OBJECTS FROM PROMISE MEALS AND FAVORITE ID "{MEAL, FAVID}"
+            user.value.favorites.add({
+              meal: res[index].data,
+              favId: favorites[index].id,
+            });
+          }
+        });
+        user.value.loggedIn = true;
+      })
+      .catch(() => {
+        user.value.loggedIn = false;
+        createPopupMessage("A profil betöltése sikertelen.")
       });
   }
   //KIJELENTKEZÉS
   function logout() {
-    const accessToken = JSON.parse(sessionStorage.getItem("accessToken"));
-    const refreshToken = JSON.parse(sessionStorage.getItem("refreshToken"));
-
+    const tokens = getTokensFromSession();
     const body = {
-      access_token: accessToken,
-      refresh_token: refreshToken,
+      Access_Token: tokens.accessToken,
+      Refresh_Token: tokens.refreshToken,
     };
-
+    const config = configHeader();
     axios
-      .post(base.tokenUrl + "/logout", body, config())
+      .post(base.tokenUrl + "/logout", body, config)
       .then(() => {
-        console.log("kilépett");
-        sessionStorage.removeItem("accessToken");
-        sessionStorage.removeItem("refreshToken");
+        removeTokensFromSession();
         this.user.loggedIn = false;
-        location.replace("/login")
+        router.replace("/login");
       })
       .catch((err) => {
         console.log(err.message);
       });
   }
-  //REFRESH TOKEN HANDLING
-  function stayLogin(accessToken, refreshToken) {
-    sessionStorage.removeItem("accessToken", accessToken);
-    sessionStorage.removeItem("refreshToken", refreshToken);
-
+  //REFRESH TOKEN HANDLER
+  async function refreshTokenHandler() {
+    const tokens = getTokensFromSession();
     const body = {
-      access_token: accessToken,
-      refresh_token: refreshToken,
+      access_token: tokens.accessToken,
+      refresh_token: tokens.refreshToken,
     };
-    
-    axios
-      .post(base.tokenUrl + "/refresh", body, config())
+    await axios
+      .post(base.tokenUrl + "/refresh", body, configHeader())
       .then((res) => {
         let accessToken = JSON.stringify(res.data.access_Token);
         let refreshToken = JSON.stringify(res.data.refresh_Token);
-        sessionStorage.setItem("accessToken", accessToken);
-        sessionStorage.setItem("refreshToken", refreshToken);
-        user.loggedIn = true;
-        getUserProfile()
+        addTokensToSession(accessToken, refreshToken);
+        getUserProfile();
       })
       .catch((err) => {
-        console.log(err.message);
-        user.loggedIn = false;
+        createPopupMessage("Token problem.")
+        user.value.loggedIn = false;
       });
   }
   //Configure header - BearerToken
-  const config = () => {
-    const accessToken = JSON.parse(sessionStorage.getItem("accessToken"));
+  const configHeader = () => {
+    const accessToken = getTokensFromSession().accessToken;
+
     const config = {
       headers: { Authorization: `Bearer ${accessToken}` },
     };
-
     return config;
-  }
+  };
+  //Add to favorites
+  function addToFavorites(id) {
+    if (user.value.loggedIn) {
+      let hasMeal = Array.from(user.value.meals.values()).some((meal) => meal.id === id);
+      let hasFavorite = Array.from(user.value.favorites.values()).some((meal) => meal.meal.id === id);
 
-  return { login, logout, user, getUserProfile, stayLogin, errorMessage, notifyMessage, createErrorMessage, createNotifyMessage, config, collapsUser };
+      if (!hasMeal && !hasFavorite) {
+        const config = configHeader();
+        axios(urlBase.favoriteUrl + "/add/" + id, config)
+          .then(async () => {
+            await axios(urlBase.mealUrl + "/" + id).then((res) => {
+              user.value.favorites.add({
+                meal: res.data,
+                favId: id,
+              });
+              createPopupMessage(`Hozzáadva a kedvencekhez!`)
+              return true;
+            });
+          })
+          .catch((err) => {
+            console.log(err)
+            return false;
+          });
+      }else {
+        hasMeal ? createPopupMessage("Saját receptet nem lehet hozzáadni a kedvencekhez!") : createPopupMessage("A recept már szerepel a kedvencek között!")
+        
+      }
+    }
+    return false;
+  }
+  //get tokens from session
+  function getTokensFromSession() {
+    const accessToken = JSON.parse(sessionStorage.getItem("accessToken"));
+    const refreshToken = JSON.parse(sessionStorage.getItem("refreshToken"));
+
+    return { accessToken, refreshToken };
+  }
+  //add tokens to session
+  function addTokensToSession(accessToken, refreshToken) {
+    sessionStorage.setItem("accessToken", accessToken);
+    sessionStorage.setItem("refreshToken", refreshToken);
+  }
+  //remove tokens from session
+  function removeTokensFromSession() {
+    sessionStorage.removeItem("accessToken");
+    sessionStorage.removeItem("refreshToken");
+  }
+  return {
+    logout,
+    user,
+    getUserProfile,
+    refreshTokenHandler,
+    errorMessage,
+    notifyMessage,
+    popupMessage,
+    createPopupMessage,
+    createErrorMessage,
+    createNotifyMessage,
+    config: configHeader,
+    addToFavorites,
+    addTokensToSession,
+    getTokensFromSession,
+  };
 });

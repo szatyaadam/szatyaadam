@@ -17,6 +17,5 @@ namespace CookBook.API.Controllers.DTO
         public int Id { get; set; }
         public Measures UnitOfMeasure { get; set; } = null!;
         public string? IngredientName { get; set; }
-
     }
 }

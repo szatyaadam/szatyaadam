@@ -13,21 +13,18 @@ namespace CookBook.WPF.Validators
 {
     public class EmailValidator : ValidationRule
     {
- 
             public static bool RegexEmailCheck(string input)
             {
                 // returns true if the input is a valid email
                 return Regex.IsMatch(input, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
             }
-    
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-        
             if (!string.IsNullOrEmpty(value.ToString()))
             {
-                string valueString=value.ToString();
                 try
                 {
+                     string? valueString=value.ToString();
                     bool validEmail = RegexEmailCheck(valueString);
                     var user=valueString.Split('@');
                     if (user[1].Contains("."))
@@ -35,27 +32,17 @@ namespace CookBook.WPF.Validators
                         user = user[1].Split(".");
                         if (user[0].Contains("mail"))
                         {
-                            if (user[1] == "com" || user[1] == "hu")
-                            {
-                                 return ValidationResult.ValidResult;
-                            }
-                          return new ValidationResult(false, "A mező csak .hu vagy .com-ot tartalmazhat ");
+                            if (user[1] == "com" || user[1] == "hu")     return ValidationResult.ValidResult;
+                            else return new ValidationResult(false, "A mező csak .hu vagy .com-ot tartalmazhat ");
                         }
-                        return new ValidationResult(false, "A megadott emailcím nem valid.");
-
+                        else return new ValidationResult(false, "A megadott emailcím nem valid.");
                     }
-                    
-                 
                 }
                 catch(Exception)
                 {
                  return new ValidationResult(false, "A megadott emailcím nem valid.");
                 }
-   
             }
-
-
-
             return new ValidationResult(false, "A mező csak betűket tartalmazhat.");
         }
     }

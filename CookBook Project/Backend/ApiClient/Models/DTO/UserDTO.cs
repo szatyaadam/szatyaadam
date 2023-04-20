@@ -1,6 +1,4 @@
-﻿
-
-namespace CookBook.API.Controllers.DTO
+﻿namespace CookBook.API.Controllers.DTO
 {
     public class UserDTO
     {
@@ -9,13 +7,6 @@ namespace CookBook.API.Controllers.DTO
         public string? Password { get; set; }
         public string? Role { get; set; }
     }
-
-
-
-
-    
-  
-
     public class LoginDTO : UserDTO
     {
         public LoginDTO(int id, string username, string password, string role, ApiClient.Models.JwtToken jwtToken)
@@ -29,6 +20,5 @@ namespace CookBook.API.Controllers.DTO
         }
         public string? Access_Token { get; set; }
         public string? Refresh_Token { get; set; }
-    }
-         
+    }  
 }

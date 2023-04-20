@@ -1,5 +1,4 @@
 ﻿using CookBook.ApiClient.Models;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
@@ -14,7 +13,6 @@ namespace CookBook.ApiClient.Handlers
         private string? _baseUrl;
         private string _accessToken;
         private string _refreshToken;
-
         public TokenAuthHandler(string path, string accessToken, string refreshToken, string? baseUrl = null)
         {
             _path = path;
@@ -24,7 +22,6 @@ namespace CookBook.ApiClient.Handlers
             _baseUrl = baseUrl ?? "http://localhost:5000/";
             InnerHandler = new HttpClientHandler();
         }
-
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             // Ha nem tartalmazza a hitelesítési fejlécet, akkor adja hozzá
@@ -33,7 +30,6 @@ namespace CookBook.ApiClient.Handlers
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
             }
             var response = await base.SendAsync(request, cancellationToken);
-
             // Ha válaszul 401-es státuszkódot kap
             if (response.StatusCode == HttpStatusCode.Unauthorized && request.Headers.Authorization != null)
             {
@@ -45,7 +41,6 @@ namespace CookBook.ApiClient.Handlers
                 // Token válasz a szervertől
                 var refreshRequest = await base.SendAsync(refreshReqMessage, cancellationToken);
                 var jwtToken = await refreshRequest.Content.ReadFromJsonAsync<JwtToken>();
-
                 if (jwtToken != null)
                 {
                     _accessToken = jwtToken.Access_Token;
@@ -55,11 +50,9 @@ namespace CookBook.ApiClient.Handlers
                     request.Headers.Remove("Authorization");
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken.Access_Token);
                 }
-
                 // Kérés újrapróbálása az új tokenekkel
                 response = await base.SendAsync(request, cancellationToken);
             }
-
             return response;
         }
     }

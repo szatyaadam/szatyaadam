@@ -1,11 +1,12 @@
 ﻿using CookBook.API.Controllers.DTO;
 using CookBook.API.Data;
 using CookBook.API.Services;
+using CookBook.ApiClient.Models.DTO;
 using CookBook.Models.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NuGet.Packaging.Signing;
 
 namespace CookBook.API.Controllers
 {
@@ -71,10 +72,10 @@ namespace CookBook.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <param name="user"></param>
-     
+
         [HttpPut]
         [Authorize(Roles = "Admin")]
-        [Route("user/modify")]
+        [Route("user/Modify")]
         public async Task<ActionResult> AdminModifyUser(User user)
         {
             User? oldUser = await _context.Users.FirstOrDefaultAsync(u => u.Id == user.Id);
@@ -109,15 +110,16 @@ namespace CookBook.API.Controllers
                 throw new Exception("A felhasználót nem sikerült frissíteni.");
             }
         }
-        //TODO: nem sikeres módosítás esetén kijelezze a problémát
-
+      
         [HttpDelete]
         [Authorize(Roles = "Admin")]
         [Route("user/delete/{id}")]
         public async Task<ActionResult> AdminDeleteUser(int id)
         {
-            User? user = await _context.Users.FirstOrDefaultAsync(user => user.Id == id);
+            try
+            {
 
+            User? user = await _context.Users.FirstOrDefaultAsync(user => user.Id == id);
             if (user != null)
             {
                 if (user.RoleId != 1)
@@ -129,8 +131,12 @@ namespace CookBook.API.Controllers
                 return BadRequest("Admin felhasználót nem törölhetsz!");
             }
             return BadRequest("A kiválasztott felhasználó nem létezik.");
+            }
+            catch 
+            {
+                throw new Exception($"Valami hiba történt");
+            }
         }
-
         #endregion
 
         #region Ádám készítette
@@ -147,26 +153,22 @@ namespace CookBook.API.Controllers
         [Route("mealtype/add")]
         public async Task<ActionResult<Mealtype>> AddNewMealtype(Mealtype newMealtype)
         {
-            var newType = await _context.Mealtypes.FirstOrDefaultAsync(x => x.MealTypeName == newMealtype.MealTypeName);
             try
             {
+                var newType = await _context.Mealtypes.FirstOrDefaultAsync(x => x.MealTypeName == newMealtype.MealTypeName);
                 if (newType != null)
                 {
                     return BadRequest("Ilyen Ételtípus már létezik");
                 }
                 else
                 {
-
                     _context.Mealtypes.Add(newMealtype);
                     _context.SaveChanges();
                     return Ok("A " + newMealtype.MealTypeName + " hozzá lett adva az adatbázishoz.");
                 }
-
             }
             catch { return BadRequest("Valami hibatörtént"); }
         }
-
-
         /// <summary>
         /// Remove a mealtype ,only available for the admin.
         /// </summary>
@@ -175,11 +177,12 @@ namespace CookBook.API.Controllers
         [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("mealtype/Delete")]
+        [Route("mealtype/Delete/{id:int}")]
         public async Task<ActionResult<string>> DeleteMealType(int id)
         {
-            var search = await _context.Mealtypes.FindAsync(id);
             try
             {
+            var search = await _context.Mealtypes.FindAsync(id);
                 if (search == null)
                 {
                     return BadRequest("Ilyen ételtípus ezzel az azonosítóval nemtalálható az adatbáziban ");
@@ -189,40 +192,32 @@ namespace CookBook.API.Controllers
                     _context.Mealtypes.Remove(search);
                     _context.SaveChanges();
                     return Ok("Az ételtípus törölve lett az adatbázisból");
-
                 }
-
             }
             catch { return BadRequest("Valami hiba történt."); }
         }
-
-        //TODO Modify Mealtype Request 
+        
         [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("mealtype/Modify")]
         public async Task<ActionResult> ModifyMealtype(Mealtype modify )
         {
-            var newMealType = await _context.Mealtypes.FirstOrDefaultAsync(x => x.Id ==modify.Id);
             try
             {
+            var newMealType = await _context.Mealtypes.FirstOrDefaultAsync(x => x.Id ==modify.Id);
 
                 newMealType.MealTypeName = modify.MealTypeName;
                 _context.Mealtypes.Update(newMealType);
                 _context.SaveChanges();
-                return Ok("A mealtype módosult");
+                return Ok("Az ételtípus módosult");
             }
             catch
             {
                 return NotFound("Rossz adatot adott meg");
             }
-
-         
         }
-
         #endregion
-
         #region MEASURE
-
         /// <summary>
         /// Add a New measure, only available for the admin
         /// </summary>
@@ -232,26 +227,24 @@ namespace CookBook.API.Controllers
         [HttpPost]
         [Route("measure/Add")]
         public ActionResult<Measures> NewMeasure(Measures newMeasure)
-
         {
             try
             {
                 Measures measure = new Measures();
                 measure.Measure= newMeasure.Measure;
                 Measures exist = _context.Meassures.FirstOrDefault(x => x.Measure== newMeasure.Measure);
-
                 if (exist != null)
                 {
-                    return BadRequest(exist.Measure+ "Már létezik az adatbázisban");
+                    return BadRequest($"A {exist.Measure} már létezik az adatbázisban");
                 }
                 else
                 { 
                     _context.Meassures.Add(measure);
                     _context.SaveChanges();
-                    return Ok(measure);
+                    return Ok($"A {measure.Measure} nevű hozzávaló sikeresen felkerült az adatbázisba.");
                 }
             }
-            catch { return BadRequest(" "); }
+            catch { return BadRequest("Valami hiba történt"); }
         }
 
         /// <summary>
@@ -261,22 +254,25 @@ namespace CookBook.API.Controllers
         /// <returns></returns>
         [Authorize(Roles = "Admin")]
         [HttpDelete]
-        [Route("measure/Delete")]
-
+        [Route("measure/Delete/{id:int}")]
         public async Task<ActionResult<Measures>> DeleteMeasure(int id)
         {
-            var deletable = await _context.Meassures.FirstOrDefaultAsync(x => x.Id == id);
             try
             {
+            var deletable = await _context.Meassures.FirstOrDefaultAsync(x => x.Id == id);
+                if (deletable != null)
+                {
                 _context.Meassures.Remove(deletable);
                 _context.SaveChanges();
                 return Ok("A megadott "+deletable.Measure+" törölve lett az adatbázisból");
+
+                }
+                else return NotFound("A megadott azonosító-val nem szerepel hozzávaló");
             }
             catch
             {
-                return NotFound("A megadott Id-val nem szerepel hozzávaló");
+                return NotFound("Valami hiba történt.");
             }
-
         }
 
         /// <summary>
@@ -289,24 +285,20 @@ namespace CookBook.API.Controllers
         [Route("measure/Modify")]
         public async Task<ActionResult<Measures>> ModifMeassure(Measures modify)
         {
-            var newMeasire = await _context.Meassures.FirstOrDefaultAsync(x => x.Id == modify.Id);
             try
             {
+            var newMeasire = await _context.Meassures.FirstOrDefaultAsync(x => x.Id == modify.Id);
 
                 newMeasire.Measure = modify.Measure;
                 _context.Meassures.Update(newMeasire);
                 _context.SaveChanges();
-                return Ok("A meassure módosult");
+                return Ok("A Hozzávaló módosult");
             }
             catch
             {
                 return NotFound("Rossz adatot adott meg");
             }
         }
-
-        
-        
-
         #endregion
         #endregion
     }

@@ -1,24 +1,585 @@
-:root{
-    --bg-color:#f9e6be;
-    --nav-bg-color:#383e429c;
+@import url('https://fonts.googleapis.com/css2?family=Alkatra&display=swap');
+
+:root {
+  --bg-color: #f9e6be;
+  --nav-height: 50px;
+  --card-title-height: 100px;
 }
 
 html,
 body,
 #app {
-  height: 100%;
+  min-height: fit-content;
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  font-family: 'Alkatra', cursive;
+}
+
+.error {
+  color: red;
+  text-shadow: 0 0 5px white;
   margin: 0;
   padding: 0;
 }
 
-.error{
-  color: red;
-  text-shadow: 0 0 5px white;
-}
-
-.success{
+.success {
   color: green;
   text-shadow: 0 0 10px whitesmoke;
+  margin: 0;
+  padding: 0;
 }
 
+.space-holder {
+  min-height: 1.5em;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.form-control {
+  text-align: center;
+}
+/***************** App.vue ****************/
+#view {
+  min-height: calc(100vh - var(--nav-height));
+  height: min-content;
+}
+
+.view-blur {
+  filter: blur(10px);
+}
+
+#float-menu {
+  position: fixed;
+  right: 20px;
+  bottom: 10px;
+  z-index: 10000000000;
+}
+
+#float-menu-item-place {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000000000;
+}
+
+#float-notificication{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000000000000;
+  animation: popDown 0.2s ease-in;
+}
+
+@keyframes popDown {
+  0%{
+    transform: translate(-50% , -100px);
+  }
+  100%{
+    transform: translate(-50%, 0px);
+  }
+}
+/* ************************************************** */
+
+/***************** EditRecipeView ****************/
+#recipe-edit-form {
+  width: 500px;
+  height: min-content;
+  max-width: 100vw;
+  padding: 40px;
+  border-radius: 5px;
+  background-color: rgb(212, 212, 212);
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+#recipe-edit-form>textarea {
+  max-height: 300px;
+  min-height: 100px;
+}
+
+#recipe-edit-form input,
+#recipe-edit-form select {
+  min-height: 28px;
+  margin-bottom: 10px;
+}
+
+.ingredients-list {
+  padding: 0;
+  list-style: none;
+}
+
+.ingredients-list>li>div>input {
+  width: inherit;
+}
+
+/* ************************************************** */
+
+/***************** LoginView ****************/
+.user-login-form {
+  background: rgba(56, 56, 56, 0.455);
+  box-shadow: 0 0 10px ghostwhite, 0 0 20px grey;
+  border-radius: 50px;
+  min-width: 300px;
+  max-height: max-content;
+  height: fit-content;
+  max-width: 660px;
+  width: 60%;
+  padding: 10px 0;
+  margin-top: 50px;
+}
+
+.switchCard {
+  animation: switchCard 0.8s linear;
+}
+
+@keyframes switchCard {
+  0% {
+    width: 0;
+    filter: blur(10px);
+  }
+
+  100% {
+    width: 100%;
+    background-color: rgba(1, 1, 1, 0.555);
+    transform: rotateY(0);
+    filter: blur(0px);
+  }
+
+}
+
+.swap_btn,
+.swap_btn:hover {
+  border-radius: 5px 2px 36px 5px;
+  background-color: azure;
+}
+
+.swap_btn svg {
+  height: 20px;
+}
+
+/* ************************************************** */
+
+/***************** ProfilView ****************/
+.own-meals-container {
+  display: flex;
+  list-style: none;
+  width: 100%;
+  max-width: 95vw;
+  overflow-x: scroll;
+  scroll-snap-type: mandatory;
+  scroll-snap-points-x: repeat(3rem);
+  scroll-snap-type: x mandatory;
+}
+
+.card-list-item {
+  width: 250px;
+  scroll-snap-align: center;
+}
+
+.card-list-item .card_link {
+  text-decoration: none;
+  color: black;
+}
+
+.recept-nav {
+  list-style: none;
+  width: 100%;
+  gap: 20px;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.recept-nav>li {
+  margin: 10px 0;
+}
+
+.recept-nav>li>button {
+  width: 80px;
+  border-radius: 10px;
+  border: 1px solid rgba(86, 86, 86, 0.524);
+  color: white;
+}
+
+/* ************************************************** */
+
+/***************** Card Component ****************/
+.card {
+  width: 100%;
+  font-size: 0.8em;
+  height: 530px;
+  overflow-y: hidden;
+}
+
+.card-img-top {
+  min-height: 200px;
+  max-height: 200px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.card-title {
+  margin: 0 auto;
+  word-wrap: break-word;
+  width: 300px;
+  max-width: 100%;
+  min-height: max-content;
+}
+
+.card_details {
+  height: 100%;
+}
+
+.card-text {
+  height: calc(300px - var(--card-title-height));
+  padding: 10px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.card-price {
+  background-color: aquamarine;
+  padding: 5px 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 1px black;
+}
+
+.print-btn {
+  width: 26px;
+  aspect-ratio: 1;
+  cursor: pointer;
+}
+
+.like-button {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  background-color: transparent;
+  border: transparent;
+}
+
+.like-button>svg {
+  fill: deepskyblue;
+  height: 30px;
+  aspect-ratio: 1;
+  filter: drop-shadow(0 0 1px rgb(5, 45, 156));
+}
+
+.likeEffect {
+  fill: azure;
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes shake {
+
+  10%,
+  90% {
+    transform: translate3d(-1px, -1px, 0);
+  }
+
+  20%,
+  80% {
+    fill: rgb(44, 184, 184);
+    transform: translate3d(2px, 3px, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    fill: rgb(44, 184, 58);
+    transform: translate3d(-3px, 1px, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(3px, -2px, 0);
+  }
+}
+
+.tooltip {
+  position: absolute;
+  display: none;
+  padding: 3px 10px;
+  background-color: #333;
+  border-radius: 3px;
+  font-size: 10px;
+  color: #eee;
+  animation: moveup 0.1s linear;
+}
+
+.tooltip:after {
+  position: absolute;
+  content: "";
+  top: 20%;
+  left: 100%;
+  border-top: 5px solid #333;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid transparent;
+  rotate: -90deg;
+}
+
+.ingredient-list-del-btn {
+  display: flex;
+  align-self: center;
+  place-items: center;
+  min-width: 20px;
+  max-width: 20px;
+  min-height: 28px;
+  max-height: 28px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.ingredient-list-del-btn:hover>.tooltip {
+  transform: translate(-110%, -20px);
+  display: block;
+  opacity: 1;
+}
+
+.like-button:hover>.tooltip {
+  transform: translate(-110%, 0px);
+  display: block;
+  opacity: 1;
+}
+
+@keyframes moveup {
+  0% {
+    transform: translate(-110%, -100%);
+  }
+
+  100% {
+    transform: translate(-110%, -20px);
+    opacity: 1;
+  }
+}
+
+/* ************************************************** */
+
+/***************** CardListComponent ****************/
+#cook-book-cards-container {
+  max-width: 80%;
+  box-sizing: content-box;
+  list-style: none;
+}
+
+@media only screen and (max-width: 576px) {
+  #cook-book-cards-container {
+    max-width: 100%;
+  }
+}
+
+#cook-book-cards-container .card_link {
+  text-decoration: none;
+  color: black;
+}
+
+/* ************************************************** */
+
+/***************** CardListComponent ****************/
+#create-recipt-from {
+  width: 500px;
+  height: 500px;
+  max-width: 100vw;
+  max-height: 100vh;
+  padding: 26px;
+  border: 5px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  overflow-y: scroll;
+}
+
+#create-recipt-from>textarea {
+  max-height: 300px;
+  min-height: 100px;
+}
+
+#create-recipt-from input,
+#create-recipt-from select {
+  min-height: 28px;
+  margin-bottom: 10px;
+}
+
+.ingredients-list {
+  padding: 0;
+  list-style: none;
+}
+
+.ingredients-list>li>div>input {
+  width: inherit;
+}
+
+/* ************************************************** */
+
+/***************** FloatMenuComponent ****************/
+#float-menu>div.menu-toggle>span>svg>path {
+  translate: 13px;
+}
+
+.btn-app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.btn-app>a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.fa>svg {
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  fill: azure;
+}
+
+.menu-toggle {
+  cursor: pointer;
+}
+
+/* ************************************************** */
+
+/***************** HamburgerMenuComponent ****************/
+#hamburger-menu-container {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  max-height: min-content;
+  font-size: 2.4em;
+  text-transform: uppercase;
+  list-style: none;
+}
+
+#hamburger-menu-container li {
+  width: 100vw;
+}
+
+#hamburger-menu-container li:hover {
+  background-color: #ffffff;
+}
+
+#hamburger-menu-container li a {
+  font-weight: bolder;
+  padding: 20px;
+  display: block;
+  width: 100%;
+  color: rgb(205, 205, 205);
+  text-decoration: none;
+}
+
+#hamburger-menu-container li a:hover {
+  color: #070606ed;
+}
+
+/* ************************************************** */
+
+/***************** MealtypesComponent ****************/
+#mealtypes-container ul {
+  width: 100%;
+  height: min;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.mealtype-button {
+  color: white;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.931);
+  border-radius: 10px;
+  height: 30px;
+  min-width: fit-content;
+  width: 80px;
+  max-width: 80px;
+  text-align: center;
+  display: grid;
+  align-items: center;
+  border: none;
+  padding: 0 3px;
+}
+
+.mealtype-button:hover {
+  background-color: #4b4b4b;
+}
+
+/* ************************************************** */
+
+/***************** RemoveRecipeComponent ****************/
+.remove-recipe {
+  width: 500px;
+  height: 500px;
+  max-width: 100vw;
+  max-height: 100vh;
+  padding: 26px;
+  border: 5px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  background-color: whitesmoke;
+  margin: 0 auto;
+  overflow-y: scroll;
+}
+
+.remove-recipe ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.remove-recipe-menu {
+  text-align: center;
+  background-color: #4b4b4b;
+  color: azure;
+  cursor: pointer;
+}
+
+.remove-recipe-menu-items {
+  background-color: beige;
+  text-align: start;
+  color: black;
+}
+
+.remove-recipe-menu-items li {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid black;
+  text-indent: 5px;
+  cursor: default;
+}
+
+.remove-recipe-menu-item-icon {
+  height: 16px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.remove-recipe-menu-item-icon:hover {
+  fill: red;
+}
+
+/* ************************************************** */

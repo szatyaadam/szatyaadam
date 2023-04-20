@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 
 namespace CookBook.ApiClient.Repositories
 {

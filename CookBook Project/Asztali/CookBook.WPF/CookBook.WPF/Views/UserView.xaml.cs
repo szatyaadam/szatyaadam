@@ -4,8 +4,6 @@ using System.Windows.Controls;
 
 namespace CookBook.WPF.Views 
 { 
-
-
     public partial class UserView : UserControl
     {
         public UserView()

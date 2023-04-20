@@ -1,6 +1,4 @@
-﻿
-
-namespace CookBook.ApiClient.Models
+﻿namespace CookBook.ApiClient.Models
 {
     public class ActualUser
     {
@@ -13,19 +11,15 @@ namespace CookBook.ApiClient.Models
             this.access_Token = access_Token;
             this.refresh_Token = refresh_Token;
         }
-
         public int id { get; set; }
         public string userName { get; set; }
         public string password { get; set; }
         public string role { get; set; }
         public string? access_Token { get; set; }
         public string? refresh_Token { get; set; }
-
         public ActualUser()
-        {
-                    
+        {       
         }
-      
     }
 }
 

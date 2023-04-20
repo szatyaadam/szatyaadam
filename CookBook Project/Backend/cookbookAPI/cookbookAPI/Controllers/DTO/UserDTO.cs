@@ -52,15 +52,17 @@ namespace CookBook.API.Controllers.DTO
 
     public class LoginDTO : UserDTO
     {
-        public LoginDTO(int id, string username, string password, string role, JwtToken jwtToken)
+        public LoginDTO(int id, string username, string password,string email, string role, JwtToken jwtToken)
         {
             Id = id;
             UserName = username;
             Password= password;
+            Email = email;
             Role = role;
             Access_Token = jwtToken.Access_Token;
             Refresh_Token = jwtToken.Refresh_Token;
         }
+        public string? Email { get; set; }
         public string? Access_Token { get; set; }
         public string? Refresh_Token { get; set; }
     }

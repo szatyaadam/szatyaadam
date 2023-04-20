@@ -12,12 +12,99 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label FontSize="24" HorizontalAlignment="Center" Grid.Row="0">Meal</Label>
+        <Label FontSize="24"
+               HorizontalAlignment="Center"
+               Grid.Row="0">Ételek</Label>
+        <Expander Grid.Row="1" 
+                  Grid.Column="1" 
+                  Header="Új Mértékegység/ÉtelTípus">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MinWidth="130"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition MinWidth="150"></ColumnDefinition>
+                    <ColumnDefinition MinWidth="130"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="0" 
+                        Grid.Column="5"
+                        Content="Mértékegység törlés"  
+                        Command="{Binding DeleteItemCommand}">
+                </Button>
+                <Button Grid.Row="0"
+                        Grid.Column="0"
+                        Content="Új mértékegység"
+                        Command="{Binding NewItemCommand}">
+                </Button>
+                <TextBox x:Name="MeasureName" 
+                         Grid.Row="0" 
+                         Grid.Column="1" 
+                         Text="{Binding NewMeasure.Measure}" >
+                </TextBox>
+                <ComboBox x:Name="ChangeMeasure"
+                          Grid.Row="0" Grid.Column="2" 
+                          ItemsSource="{Binding Measure}" 
+                          SelectedItem="{Binding ChangeMeasure}" 
+                          SelectedValue="{Binding ChangeMeasure}"
+                          DisplayMemberPath="Measure" />
+                <TextBox  Grid.Row="0"
+                          Grid.Column="3"
+                          Text="{Binding ChangeMeasure.Measure}" >
+                </TextBox>
 
-        <Expander Grid.Row="1"  Header="Recept details" Name="Add" >
+                <Button     Grid.Row="0" 
+                            Grid.Column="4"
+                            Content="Mértékegység változtatás"
+                            Width="auto" 
+                            Command="{Binding ChangeItemCommand}">
+                </Button>
+                <Button Grid.Row="1"
+                        Grid.Column="5"
+                        Content="Ételtípus törlés" 
+                        Command="{Binding DeleteItemCommand}">
+                </Button>
+
+                <Button Grid.Row="1" 
+                        Grid.Column=" 0" 
+                        Content="Új ételtípus"
+                        Command="{Binding NewItemCommand}">
+                </Button>
+                <TextBox Grid.Row="1"
+                         Grid.Column="1" 
+                         Text="{Binding NewMealType.MealTypeName }"  >
+                </TextBox>
+                <ComboBox x:Name="MealtypeChange"
+                          Grid.Row="1" Grid.Column="2" 
+                          ItemsSource="{Binding mealType}" 
+                          SelectedItem="{Binding ChangeMealType}" 
+                          SelectedValue="{Binding ChangeMealType}" 
+                          DisplayMemberPath="MealTypeName" />
+                <TextBox Grid.Row="1"
+                         Grid.Column="3"
+                         Text="{Binding  ChangeMealType.MealTypeName }" >
+                </TextBox>
+                <Button Grid.Row="1" 
+                        Grid.Column="4"
+                        Content="Ételtípus változtatás"
+                        Width="auto"
+                        Command="{Binding ChangeItemCommand}">
+                </Button>
+            </Grid>
+        </Expander>
+        <Expander Grid.Row="2"
+                  Grid.Column="0"
+                  Header="Recept Részletei"
+                  Name="Add" >
             <Grid Name="grid1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
@@ -25,7 +112,7 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
-           
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
@@ -34,115 +121,349 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
-              
-                    <Label Content="Name" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Grid.Row="0" Grid.Column="1" MinWidth="200" Text="{Binding SelectedMeal.MealName}"/>
-                <Label Content="Price" Grid.Row="0" Grid.Column="2"  />
-                <TextBox Grid.Row="0" Grid.Column="3" Width="235" HorizontalAlignment="Left" x:Name="txtPrice"
+                <Label Content="Név" 
+                       Grid.Row="0" 
+                       Grid.Column="0"/>
+                <TextBox Grid.Row="0" 
+                         Grid.Column="1" 
+                         MinWidth="200"
+                         x:Name="txtMealName"
                          Validation.ErrorTemplate="{StaticResource validationTemplate}">
-                    <Binding Path="SelectedMeal.Price" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                    <Binding Path="SelectedMeal.MealName" 
+                             UpdateSourceTrigger="PropertyChanged" 
+                             ValidatesOnDataErrors="True">
+                        <Binding.ValidationRules>
+                            <v:NameValidator/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <Label Content="Ár"
+                       Grid.Row="0" 
+                       Grid.Column="2"  />
+                <TextBox Grid.Row="0" 
+                         Grid.Column="3"
+                         Width="235"
+                         HorizontalAlignment="Left"
+                         x:Name="txtPrice"
+                         Validation.ErrorTemplate="{StaticResource validationTemplate}">
+                    <Binding Path="SelectedMeal.Price"
+                             UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True">
                         <Binding.ValidationRules>
                             <v:PriceValidator/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox>
-                <Label Content="Preparation Time" Grid.Row="1" Grid.Column="2"  />
-                <TextBox Grid.Row="1" Grid.Column="3" Width="235" HorizontalAlignment="Left" x:Name="txtTime"
+                <Label Content="Elkésztési Idő" 
+                       Grid.Row="1"
+                       Grid.Column="2"  />
+                <TextBox Grid.Row="1"
+                         Grid.Column="3"
+                         Width="235"
+                         HorizontalAlignment="Left"
+                         x:Name="txtTime"
                          Validation.ErrorTemplate="{StaticResource validationTemplate}">
-                    <Binding Path="SelectedMeal.PreperationTime" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
-                        <Binding.ValidationRules>
+                    <Binding Path="SelectedMeal.PreperationTime" 
+                             UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True" >
+                        <Binding.ValidationRules >
                             <v:TimeValidator/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox>
+                <Label Content="ÉtelTípus" 
+                       Grid.Row="1" 
+                       Grid.Column="0"/>
+                <ComboBox x:Name="Mealtypes" 
+                          Grid.Row="1" 
+                          Grid.Column="1" 
+                          ItemsSource="{Binding mealType}" 
+                          SelectedItem="{Binding SelectedMeal.Mealtype}" 
+                          SelectedValue="{Binding SelectedMeal.Mealtype.Id}" 
+                          DisplayMemberPath="MealTypeName"
+                          SelectedValuePath="Id"/>
+                <Label Content="Leírás" 
+                       Grid.Row="2"
+                       Grid.Column="0"/>
+                <TextBox Name="Discripton" 
+                         Grid.Row="2" 
+                         Grid.Column="1" 
+                         Width="520"
+                         Grid.ColumnSpan="3"
+                         Grid.RowSpan="2" 
+                         HorizontalAlignment="Left" 
+                         Text="{Binding SelectedMeal.Discription}"/>
+                <Button Content="Új hozzávaló" 
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Width="100"
+                        HorizontalAlignment="Left"
+                        Click="NewIngredient" 
+                        Name="NewIngButton"  />
+                <Button Content="Meglévő hozzávaló" 
+                        x:Name="OldIngButton"
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Width="auto"
+                        HorizontalAlignment="Left"
+                        Click="OldIngredient"
+                        Visibility="Collapsed" />
+                <Label Content="Hozzávaló"
+                       Grid.Row="4"
+                       Grid.Column="0"  />
+                <TextBox x:Name="newIngredientName" 
+                         Text="{Binding NewMaterial.IngredientName}"
+                         Grid.Row="5" 
+                         Grid.Column="3" 
+                         HorizontalAlignment="Left" 
+                         MinWidth="40"
+                         MaxWidth="70"
+                        Visibility="Collapsed"
+                         Margin="-120,0,0,0" />
+                <TextBox x:Name="newQuantity"
+                         Grid.Row="5"
+                         Grid.Column="1" 
+                         HorizontalAlignment="Left"
+                         Width="40" 
+                         Text="{Binding NewIngredient.Quantity}"
+                         Visibility="Collapsed"  >
+                </TextBox>
+                <ComboBox  x:Name="chooseNewIngredient"
+                           Grid.Row="4" 
+                           Grid.Column="2"  
+                           ItemsSource="{Binding Measure}" 
+                           SelectedItem="{Binding SelectedMeasure}" 
+                           SelectedValue="{Binding SelectedMeasure.Id}"
+                           DisplayMemberPath="Measure" SelectedValuePath="Id"
+                           HorizontalAlignment="Left"
+                           Width="85"
+                           RenderTransformOrigin="1,1" 
+                           Panel.ZIndex="-1" 
+                           BorderBrush="#FFF9F6F6" 
+                           Margin="35,0,0,0"
+                           Visibility="Collapsed" >
+                    <ComboBox.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform X="-35"/>
+                        </TransformGroup>
+                    </ComboBox.RenderTransform>
+                </ComboBox>
+                <ComboBox x:Name="ingredient" 
+                          Grid.Row="4" 
+                          Grid.Column="1" 
+                          ItemsSource="{Binding SelectedMeal.Ingredients }"
+                          DisplayMemberPath="Materials.IngredientName"
+                          Width="100"
+                          HorizontalAlignment="Left" />
+                <Label Grid.Column="2"
+                       Grid.Row="5" 
+                       HorizontalAlignment="Left"
+                       Margin="-100,0,0,0"
+                       Content="Hozzávaló név:">
+                </Label>
+                <Button Grid.Row="4"
+                        Grid.Column="3"
+                        Content="Hozzáadás" 
+                        Command="{Binding AddItemCommand}"
+                        CommandParameter="{Binding SelectedMeal}" >
+                </Button>
+                <Button Grid.Row="5"
+                        Grid.Column="3"
+                        Content="Eltávolítás"
+                        Command="{Binding RemoveItemCommand}" 
+                        CommandParameter="{Binding ElementName=ingredient,
+                        Path=SelectedItem}" >
+                </Button>
+                <TextBox x:Name="IngredientName" 
+                         Text="{Binding ElementName=ingredient, Path=SelectedItem.Materials.IngredientName}"
+                         Grid.Row="5" 
+                         Grid.Column="3" 
+                         HorizontalAlignment="Left" 
+                         MinWidth="40"
+                         Margin="-120,0,0,0"
+                        />
+                <Label Grid.Column="0" 
+                       Grid.Row="5" 
+                       HorizontalAlignment="Right"
+                       Content="Mennyiség:">
+                </Label>
+                <TextBox x:Name="Quantity"
+                         Grid.Row="5"
+                         Grid.Column="1" 
+                         Width="40" 
+                         HorizontalAlignment="Left" 
+                         Validation.ErrorTemplate="{StaticResource validationTemplate}">
+                    <Binding  ElementName="ingredient" 
+                              Path="SelectedItem.Quantity" 
+                              UpdateSourceTrigger="PropertyChanged" 
+                              ValidatesOnDataErrors="True">
+                        <Binding.ValidationRules>
+                            <v:QuantityValidator/>
+                        </Binding.ValidationRules>
+                    </Binding>
 
-
-                <Label Content="MealType" Grid.Row="1" Grid.Column="0"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedMeal.MealType.MealTypeName}"/>
-
-                <Label Content="Discription" Grid.Row="2" Grid.Column="0"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Width="520" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Left" Text="{Binding SelectedMeal.Discription}"/>
-                <!--<Button Content="More ingredient" Grid.Row="3" Grid.Column="0" Width="100"  HorizontalAlignment="Left" Click="addRow"/>
-                
-                <Label Content="Ingredient" Grid.Row="4" Grid.Column="0"  />
-                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SelectedMeal.MealType}"/>
-                <Label Content="Measure" Grid.Row="4" Grid.Column="2" />
-                <ComboBox Grid.Row="4" Grid.Column="3" 
-                              Width="235" Margin="2"
-                                HorizontalAlignment="Left"
-                              ItemsSource="{Binding Meals.MealType}"
-                              SelectedItem="{Binding SelectedMeal.MealType}"
-                              SelectedValue="{Binding SelectedMeal.MealType}"
-                              DisplayMemberPath="MealTypeName"
-                              SelectedValuePath="Id"
-                          />
-
-                <Label Content="Ingredient" Grid.Row="5" Grid.Column="0"  />
-                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding SelectedMeal.Ingredients}"/>
-                <Label Content="Measure" Grid.Row="5" Grid.Column="2" />
-                <ComboBox     Grid.Row="5" Grid.Column="3" 
-                              Width="235" Margin="2"
-                              HorizontalAlignment="Left"
-                              ItemsSource="{Binding mealType}"
-                              SelectedItem="{Binding MealType.MealTypeName}"
-                              SelectedValue="{Binding mealType.MealTypeName}"
-                              DisplayMemberPath="IngredientName"
-                              SelectedValuePath="Id"
-                />-->   
-                <Button Content="New" Grid.Row="0" Grid.Column="4" Command="{Binding NewCommand}"/>
-                <Button Content="Save" Grid.Row="1" Grid.Column="4" 
-                            Command="{Binding SaveCommandAsync}" CommandParameter="{Binding SelectedMeal}"/>
-                <Button Content="Delete" Grid.Row="2" Grid.Column="4" 
-                            Command="{Binding DeleteCommandAsync}" CommandParameter="{Binding SelectedMeal}"/>
-
-
+                </TextBox>
+                <Label Grid.Column="2" 
+                       Grid.Row="4" 
+                       Content="Mértékegység:"
+                       Margin="-100,0,0,0"
+                       HorizontalAlignment="Left" >
+                </Label>
+                <TextBox x:Name="Measure" 
+                         Grid.Row="4" 
+                         Grid.Column="2" 
+                         Text="{Binding ElementName=ingredient, Path=SelectedItem.Materials.UnitOfMeasure.Measure}"
+                         Width="70" 
+                         HorizontalAlignment="Left" 
+                         IsReadOnly="True"/>
+                <ComboBox  x:Name="chooseIngredient"
+                           Grid.Row="4" 
+                           Grid.Column="2"  
+                           ItemsSource="{Binding Measure}" 
+                           SelectedItem="{Binding ElementName=ingredient, Path=SelectedItem.Materials.UnitOfMeasure}" 
+                           SelectedValue="{Binding SelectedItem.Materials.UnitOfMeasure.Id}"
+                           DisplayMemberPath="Measure" 
+                           SelectedValuePath="Id"
+                           HorizontalAlignment="Left"
+                           Width="85"
+                           RenderTransformOrigin="1,1" 
+                           Panel.ZIndex="-1" 
+                           BorderBrush="#FFF9F6F6" 
+                            Margin="35,0,0,0" >
+                    <ComboBox.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform X="-35"/>
+                        </TransformGroup>
+                    </ComboBox.RenderTransform>
+                </ComboBox>
+                <Button Content="Új"
+                        Grid.Row="0" 
+                        Grid.Column="4"
+                        Command="{Binding NewCommand}">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                            <Setter Property="IsEnabled" Value="false" />
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding ElementName=txtPrice, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=txtTime, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=txtMealName, Path=(Validation.HasError)}" Value="false" />
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="IsEnabled" Value="true" />
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Content="Mentés" 
+                        Grid.Row="1" 
+                        Grid.Column="4"
+                        Click="GetEmpty"
+                        Command="{Binding SaveCommandAsync}"
+                        CommandParameter="{Binding SelectedMeal}" >
+                    <Button.Style >
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                            <Setter Property="IsEnabled" Value="false" />
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding ElementName=txtPrice, Path=(Validation.HasError)}"
+                                                   Value="false" />
+                                        <Condition Binding="{Binding ElementName=txtTime, Path=(Validation.HasError)}" 
+                                                   Value="false" />
+                                        <Condition Binding="{Binding ElementName=txtMealName, Path=(Validation.HasError)}" 
+                                                   Value="false" />
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="IsEnabled"
+                                            Value="true" />
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Content="Törlés"
+                        Grid.Row="2"
+                        Grid.Column="4" 
+                        Command="{Binding DeleteCommandAsync}"
+                        CommandParameter="{Binding SelectedMeal}"/>
             </Grid>
         </Expander>
-
-        <Grid Grid.Row="2" >
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="Total: "/>
+        <Grid Grid.Row="3" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="78*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        Grid.ColumnSpan="2">
+                <TextBlock Text="Összesen: "/>
                 <TextBlock Text="{Binding TotalItems}" />
-                <TextBlock Text=" items, per page: " />
-                <ComboBox Width="100" ItemsSource="{Binding ItemsPerPageList}" SelectedItem="{Binding ItemsPerPage}"/>
+                <TextBlock Text=" elem, per oldal: " />
+                <ComboBox Width="100" ItemsSource="{Binding ItemsPerPageList}" 
+                          SelectedItem="{Binding ItemsPerPage}"/>
             </StackPanel>
-            <StackPanel Margin="0,5,0,5" Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBox Width="200" VerticalAlignment="Center" Text="{Binding SearchKey}"/>
-                <Button Content="Search" Command="{Binding LoadDataCommand}"/>
+            <StackPanel Margin="456,5,0,5"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Left"
+                        Grid.Column="1">
+                <TextBox Width="200"
+                         VerticalAlignment="Center" 
+                         Text="{Binding SearchKey}"/>
+                <Button Content="Keresés"
+                        Command="{Binding LoadDataCommand}"/>
             </StackPanel>
         </Grid>
-      
-            <DataGrid Grid.Row="3" ColumnWidth="*"
+
+        <DataGrid Grid.Row="4" ColumnWidth="*"
                   ItemsSource="{Binding Meals}"
                   SelectedItem="{Binding SelectedMeal}"
                   AutoGenerateColumns="False"
-                  CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
+                  CanUserAddRows="False" 
+                  CanUserDeleteRows="False" 
                   SelectionMode="Single"
-                  Sorting="DataGrid_Sorting">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding MealName}" />
-                <DataGridTextColumn Header="Preperation Time" Binding="{Binding PreperationTime}" />
-                <DataGridTextColumn Header="Price" Binding="{Binding Price}" />
-                <DataGridTextColumn Header="Meal Type" Binding="{Binding MealType.MealTypeName }" />
-                <DataGridTextColumn Header="Discription" Binding="{Binding Discription}" />
-
-                </DataGrid.Columns>
-            </DataGrid>
-        
-
-        <Grid Grid.Row="4" Margin="5">
+                  Sorting="DataGrid_Sorting"
+                  IsReadOnly="True"
+                  
+                  >
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Név" 
+                                    Binding="{Binding MealName}" />
+                <DataGridTextColumn Header="Elkészítési Idő"
+                                    Binding="{Binding PreperationTime}"/>
+                <DataGridTextColumn Header="Ár"
+                                    Binding="{Binding Price}"/>
+                <DataGridTextColumn Header="Ételtípus" 
+                                    Binding="{Binding Mealtype.MealTypeName }" />
+                <DataGridTextColumn Header="Leírás"
+                                    Binding="{Binding Discription}" />
+                <DataGridTextColumn Header="Hozzávaló" 
+                                    Binding="{Binding Ingredients[0].Materials.IngredientName, StringFormat='{}{0}...'}"  />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="5" Margin="5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="&lt;&lt;" Grid.Column="0" Command="{Binding FirstPageCommand}" />
-            <Button Content="&lt;" Grid.Column="1" Command="{Binding PreviousPageCommand}" />
-            <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="{Binding CurrentPage}" />
-            <Button Content=">" Grid.Column="3" Command="{Binding NextPageCommand}" />
-            <Button Content=">>" Grid.Column="4" Command="{Binding LastPageCommand}" />
+            <Button Content="&lt;&lt;"
+                    Grid.Column="0" 
+                    Command="{Binding FirstPageCommand}" />
+            <Button Content="&lt;"
+                    Grid.Column="1"
+                    Command="{Binding PreviousPageCommand}" />
+            <TextBlock Grid.Column="2"
+                       HorizontalAlignment="Center" 
+                       Text="{Binding CurrentPage}" />
+            <Button Content=">"
+                    Grid.Column="3"
+                    Command="{Binding NextPageCommand}" />
+            <Button Content=">>"
+                    Grid.Column="4"
+                    Command="{Binding LastPageCommand}" />
         </Grid>
     </Grid>
 </UserControl>

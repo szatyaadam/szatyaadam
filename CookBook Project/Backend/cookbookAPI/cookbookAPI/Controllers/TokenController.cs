@@ -65,7 +65,7 @@ namespace CookBook.Models.Controllers
             _context.Tokens.Add(new Token(jwtToken.Refresh_Token, dbUser.Id));
             await _context.SaveChangesAsync();
             // Felhasználói adatok és token visszaadása
-            return new LoginDTO(dbUser.Id, dbUser.UserName, dbUser.Password, dbUser.Role.RoleName, jwtToken);
+            return new LoginDTO(dbUser.Id, dbUser.UserName, dbUser.Password, dbUser.Email, dbUser.Role.RoleName, jwtToken);
         }
 
         [AllowAnonymous]
@@ -73,6 +73,7 @@ namespace CookBook.Models.Controllers
         [Route("Refresh")]
         public async Task<ActionResult<JwtToken>> Refresh(JwtToken jwtToken)
         {
+            
             // Felhasználói adatok kinyerése a tokenből
             var principal = _jwtManagerService.GetPrincipalFromExpiredToken(jwtToken.Access_Token);
             var claimId = principal.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);

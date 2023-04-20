@@ -1,15 +1,8 @@
-﻿using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Data;
-using System.Text.RegularExpressions;
 using CookBook.WPF.ViewModels;
 using CookBook.Models.Models;
 using CookBook.ApiClient.Repositories;
-using System.Windows.Data;
-using BCrypt.Net;
-using System.Net;
-
 namespace CookBook.WPF.Views
 {
     public partial class LoginView : UserControl
@@ -25,17 +18,13 @@ namespace CookBook.WPF.Views
                 LoggedIn();
             }
         }
-        public void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            
+            public void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {  
             loginViewModel.Username = UserName.Text;
             loginViewModel.Password = password.Password;
-            loginViewModel.ErrorMessages = "Signing in.";
-            //var s= BCrypt.Net.BCrypt.HashPassword(password.Password);
+            loginViewModel.ErrorMessages = "Beléptetés";
             LoggedIn();
         }
-   
-
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
             loginViewModel.Authentication = false;
@@ -51,13 +40,10 @@ namespace CookBook.WPF.Views
         {
         if(loginViewModel.ErrorMessages==".")
             {
-                loginViewModel.ErrorMessages = "You are already logged in.";
+                loginViewModel.ErrorMessages = "Ön sikeresen belépett";
             }
-
                 Buttons.Visibility = Visibility.Hidden;
                 signedIn.Visibility = Visibility.Visible;
-
         }
-      
     }
 }  

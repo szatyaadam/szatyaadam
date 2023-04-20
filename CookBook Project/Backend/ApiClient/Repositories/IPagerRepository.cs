@@ -1,6 +1,5 @@
 ﻿using CookBook.ApiClient.Models;
 using CookBook.ApiClient.Models.DTO;
-using System.Text.Json;
 
 namespace CookBook.ApiClient.Repositories
 {

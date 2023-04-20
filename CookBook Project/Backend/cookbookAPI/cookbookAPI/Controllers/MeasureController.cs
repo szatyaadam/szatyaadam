@@ -20,16 +20,11 @@ namespace cookbookAPI.Controllers
         [AllowAnonymous]
         [HttpGet]
         [Route("all")]
+
         public async Task<ActionResult<List<Measures>>> GetAllMeassures()
         {
             return await context.Meassures.ToListAsync();
         }
-        [AllowAnonymous]
-        [HttpGet]
-    
-        public async Task<ActionResult<IEnumerable<Measures>>> GetMeassures()
-        {
-            return await context.Meassures.ToListAsync();
-        }
+ 
     }
 }

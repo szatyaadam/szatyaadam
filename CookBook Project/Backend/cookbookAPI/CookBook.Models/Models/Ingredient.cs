@@ -16,7 +16,7 @@ namespace CookBook.Models.Models
         [Column(TypeName = "int(11)")]
         public int MealId { get; set; }
         [Column(TypeName = "smallint(11)")]
-        public short Quantity { get; set; }
+        public short? Quantity { get; set; }
         [Column("MaterialsId", TypeName = "int(11)")]
         public int? MaterialId { get; set; }
 

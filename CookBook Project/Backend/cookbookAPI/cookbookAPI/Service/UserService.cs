@@ -25,8 +25,10 @@ namespace CookBook.API.Services
             if (oldUserData.Password != newUserData.Password && !string.IsNullOrEmpty(newUserData.Password))
                 oldUserData.Password = BCrypt.Net.BCrypt.HashPassword(newUserData.Password);
 
-            if (oldUserData.RoleId != newUserData.RoleId && newUserData.RoleId != null)
-                oldUserData.RoleId = newUserData.RoleId;
+            //if (oldUserData.RoleId != newUserData.RoleId && newUserData.RoleId != 0)
+            //{
+            //    oldUserData.RoleId = newUserData.RoleId;
+            //}
             
             return oldUserData;
         }

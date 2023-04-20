@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CookBook.WPF.Views"
              xmlns:v="clr-namespace:CookBook.WPF.Validators"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
@@ -16,58 +15,114 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label FontSize="24" HorizontalAlignment="Center" Grid.Row="0">Users</Label>
-        
-        <Expander Grid.Row="1" Header="User details">
+        <Label FontSize="24"
+               HorizontalAlignment="Center"
+               Grid.Row="0">Felhasználók</Label>
+        <Expander Grid.Row="1" 
+                  Header="A Felhasználó adatai">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
-       
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Label Content="UserName" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedUser.UserName}"/>
-                <Label Content="Email" Grid.Row="1" Grid.Column="0"/>      
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedUser.Email}"/>
-                <Label Content="Password" Grid.Row="3" Grid.Column="0"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedUser.Password}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtemail"
+                <Label Content="Felhasználó Név"
+                       Grid.Row="0"
+                       Grid.Column="0"/>
+                <TextBox Grid.Row="0" 
+                         Grid.Column="1"
+                         Text="{Binding SelectedUser.UserName}"/>
+                <Label Content="Email"
+                       Grid.Row="1"
+                       Grid.Column="0"/>
+                <TextBox Grid.Row="1"
+                         Grid.Column="1"
+                         x:Name="txtEmail"
                          Validation.ErrorTemplate="{StaticResource validationTemplate}">
                     <TextBox.Text>
-                        <Binding Path="SelectedUser.Email" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                        <Binding Path="SelectedUser.Email"
+                                 UpdateSourceTrigger="PropertyChanged" 
+                                 ValidatesOnDataErrors="True">
                             <Binding.ValidationRules>
                                 <v:EmailValidator/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-                <Label Content="RoleId" Grid.Row="2" Grid.Column="0"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedUser.RoleId}"/>
-
-                <Button Content="Save" Grid.Row="0" Grid.Column="2" 
-                        Command="{Binding SaveCommandAsync}" CommandParameter="{Binding SelectedUser}"/>
-                <Button Content="Delete" Grid.Row="1" Grid.Column="2" 
-                        Command="{Binding DeleteCommandAsync}" CommandParameter="{Binding SelectedUser}"/>
+                <Label Content="Szerepkör"
+                       Grid.Row="2"
+                       Grid.Column="0"/>
+                <TextBox Grid.Row="2" 
+                         Grid.Column="1"
+                         x:Name="txtRole"
+                         Validation.ErrorTemplate="{StaticResource validationTemplate}">
+                    <Binding Path="SelectedUser.Role.RoleName" 
+                             UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True">
+                        <Binding.ValidationRules>
+                            <v:RoleValidator/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <Label Content="Jelszó" 
+                       Grid.Row="3"
+                       Grid.Column="0"/>
+                <TextBox Grid.Row="3"
+                         Grid.Column="1" 
+                         Text="{Binding SelectedUser.Password}"/>
+                <Button Content="Mentés" 
+                        Grid.Row="0" 
+                        Grid.Column="2" 
+                        Command="{Binding SaveCommandAsync}"
+                        CommandParameter="{Binding SelectedUser}">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                            <Setter Property="IsEnabled"
+                                    Value="false" />
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding ElementName=txtEmail, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=txtRole, Path=(Validation.HasError)}" Value="false" />
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="IsEnabled"
+                                            Value="true" />
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Content="Törlés"
+                        Grid.Row="1" 
+                        Grid.Column="2" 
+                        Command="{Binding DeleteCommandAsync}"
+                        CommandParameter="{Binding SelectedUser}"/>
             </Grid>
         </Expander>
-        
         <Grid Grid.Row="2">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="Total: "/>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Összesen: "/>
                 <TextBlock Text="{Binding TotalItems}" />
-                <TextBlock Text=" items, per page: " />
-                <ComboBox Width="100" ItemsSource="{Binding ItemsPerPageList}" SelectedItem="{Binding ItemsPerPage}"/>
+                <TextBlock Text=" elem, per oldal: " />
+                <ComboBox Width="100"
+                          ItemsSource="{Binding ItemsPerPageList}"
+                          SelectedItem="{Binding ItemsPerPage}"/>
             </StackPanel>
-            <StackPanel Margin="0,5,0,5" Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBox Width="200" VerticalAlignment="Center" Text="{Binding SearchKey}"/>
-                <Button Content="Search" Command="{Binding LoadDataCommand}"/>
+            <StackPanel Margin="0,5,0,5" 
+                        Orientation="Horizontal" 
+                        HorizontalAlignment="Right">
+                <TextBox Width="200"
+                         VerticalAlignment="Center" 
+                         Text="{Binding SearchKey}"/>
+                <Button Content="Keresés" 
+                        Command="{Binding LoadDataCommand}"/>
             </StackPanel>
         </Grid>
         <ScrollViewer Grid.Row="3">
@@ -75,18 +130,23 @@
                   ItemsSource="{Binding Users}"
                   SelectedItem="{Binding SelectedUser}"
                   AutoGenerateColumns="False"
-                  CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  IsReadOnly="True"
                   SelectionMode="Single"
                   Sorting="DataGrid_Sorting">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="UserName" Binding="{Binding UserName}" />
-                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
-                    <DataGridTextColumn Header="RoleId" Binding="{Binding RoleId}" />
-
+                    <DataGridTextColumn Header="Felhasználó név" 
+                                        Binding="{Binding UserName}" />
+                    <DataGridTextColumn Header="Email" 
+                                        Binding="{Binding Email}" />
+                    <DataGridTextColumn Header="Szerepkör" 
+                                        Binding="{Binding Role.RoleName}" />
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>
-        <Grid Grid.Row="4" Margin="0,5,0,5">
+        <Grid Grid.Row="4"
+              Margin="0,5,0,5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -94,13 +154,21 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="&lt;&lt;" Grid.Column="0" Command="{Binding FirstPageCommand}" />
-            <Button Content="&lt;" Grid.Column="1" Command="{Binding PreviousPageCommand}" />
-            <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="{Binding CurrentPage}" />
-            <Button Content=">" Grid.Column="3" Command="{Binding NextPageCommand}" />
-            <Button Content=">>" Grid.Column="4" Command="{Binding LastPageCommand}" />
+            <Button Content="&lt;&lt;"
+                    Grid.Column="0"
+                    Command="{Binding FirstPageCommand}" />
+            <Button Content="&lt;"
+                    Grid.Column="1"
+                    Command="{Binding PreviousPageCommand}" />
+            <TextBlock Grid.Column="2" 
+                       HorizontalAlignment="Center"
+                       Text="{Binding CurrentPage}" />
+            <Button Content=">"
+                    Grid.Column="3" 
+                    Command="{Binding NextPageCommand}" />
+            <Button Content=">>"
+                    Grid.Column="4"
+                    Command="{Binding LastPageCommand}" />
         </Grid>
     </Grid>
 </UserControl>
-<!--live visual tree
-    Live property explorer-->

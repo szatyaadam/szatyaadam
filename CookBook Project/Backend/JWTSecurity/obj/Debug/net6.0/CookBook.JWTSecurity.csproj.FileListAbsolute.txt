@@ -1,15 +1,15 @@
-C:\Users\adam\Source\Repos\receptek\Forráskód\Backend\JWTSecurity\bin\Debug\net6.0\CookBook.JWTSecurity.deps.json
-C:\Users\adam\Source\Repos\receptek\Forráskód\Backend\JWTSecurity\bin\Debug\net6.0\CookBook.JWTSecurity.dll
-C:\Users\adam\Source\Repos\receptek\Forráskód\Backend\JWTSecurity\bin\Debug\net6.0\CookBook.JWTSecurity.pdb
-C:\Users\adam\Source\Repos\receptek\Forráskód\Backend\JWTSecurity\obj\Debug\net6.0\CookBook.JWTSecurity.csproj.AssemblyReference.cache
-C:\Users\adam\Source\Repos\receptek\Forráskód\Backend\JWTSecurity\obj\Debug\net6.0\CookBook.JWTSecurity.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\adam\Source\Repos\receptek\Forráskód\Backend\JWTSecurity\obj\Debug\net6.0\CookBook.JWTSecurity.AssemblyInfoInputs.cache
-C:\Users\adam\Source\Repos\receptek\Forráskód\Backend\JWTSecurity\obj\Debug\net6.0\CookBook.JWTSecurity.AssemblyInfo.cs
-C:\Users\adam\Source\Repos\receptek\Forráskód\Backend\JWTSecurity\obj\Debug\net6.0\CookBook.JWTSecurity.csproj.CoreCompileInputs.cache
-C:\Users\adam\Source\Repos\receptek\Forráskód\Backend\JWTSecurity\obj\Debug\net6.0\CookBook.JWTSecurity.dll
-C:\Users\adam\Source\Repos\receptek\Forráskód\Backend\JWTSecurity\obj\Debug\net6.0\refint\CookBook.JWTSecurity.dll
-C:\Users\adam\Source\Repos\receptek\Forráskód\Backend\JWTSecurity\obj\Debug\net6.0\CookBook.JWTSecurity.pdb
-C:\Users\adam\Source\Repos\receptek\Forráskód\Backend\JWTSecurity\obj\Debug\net6.0\ref\CookBook.JWTSecurity.dll
+C:\Users\adam\source\repos\receptek\Forráskód\Backend\JWTSecurity\bin\Debug\net6.0\CookBook.JWTSecurity.deps.json
+C:\Users\adam\source\repos\receptek\Forráskód\Backend\JWTSecurity\bin\Debug\net6.0\CookBook.JWTSecurity.dll
+C:\Users\adam\source\repos\receptek\Forráskód\Backend\JWTSecurity\bin\Debug\net6.0\CookBook.JWTSecurity.pdb
+C:\Users\adam\source\repos\receptek\Forráskód\Backend\JWTSecurity\obj\Debug\net6.0\CookBook.JWTSecurity.csproj.AssemblyReference.cache
+C:\Users\adam\source\repos\receptek\Forráskód\Backend\JWTSecurity\obj\Debug\net6.0\CookBook.JWTSecurity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\adam\source\repos\receptek\Forráskód\Backend\JWTSecurity\obj\Debug\net6.0\CookBook.JWTSecurity.AssemblyInfoInputs.cache
+C:\Users\adam\source\repos\receptek\Forráskód\Backend\JWTSecurity\obj\Debug\net6.0\CookBook.JWTSecurity.AssemblyInfo.cs
+C:\Users\adam\source\repos\receptek\Forráskód\Backend\JWTSecurity\obj\Debug\net6.0\CookBook.JWTSecurity.csproj.CoreCompileInputs.cache
+C:\Users\adam\source\repos\receptek\Forráskód\Backend\JWTSecurity\obj\Debug\net6.0\CookBook.JWTSecurity.dll
+C:\Users\adam\source\repos\receptek\Forráskód\Backend\JWTSecurity\obj\Debug\net6.0\refint\CookBook.JWTSecurity.dll
+C:\Users\adam\source\repos\receptek\Forráskód\Backend\JWTSecurity\obj\Debug\net6.0\CookBook.JWTSecurity.pdb
+C:\Users\adam\source\repos\receptek\Forráskód\Backend\JWTSecurity\obj\Debug\net6.0\ref\CookBook.JWTSecurity.dll
 C:\Users\adam\source\repos\szatyaadam\CookBook Project\Backend\JWTSecurity\bin\Debug\net6.0\CookBook.JWTSecurity.deps.json
 C:\Users\adam\source\repos\szatyaadam\CookBook Project\Backend\JWTSecurity\bin\Debug\net6.0\CookBook.JWTSecurity.dll
 C:\Users\adam\source\repos\szatyaadam\CookBook Project\Backend\JWTSecurity\bin\Debug\net6.0\CookBook.JWTSecurity.pdb

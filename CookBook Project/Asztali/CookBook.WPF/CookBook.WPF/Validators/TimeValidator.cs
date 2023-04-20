@@ -9,12 +9,8 @@ namespace CookBook.WPF.Validators
         {
             if (value != null)
             {
-                string valueText = value.ToString();
-
-                if (valueText.Contains(':'))
-                {
-                    return ValidationResult.ValidResult;
-                }
+                string? valueText = value.ToString();
+                if (valueText.Contains(':')) return ValidationResult.ValidResult;
             }
             return new ValidationResult(false, "A mező helyes megadása HH:MM:SS .");
         }

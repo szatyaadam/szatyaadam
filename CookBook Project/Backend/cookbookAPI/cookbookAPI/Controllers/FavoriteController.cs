@@ -4,7 +4,11 @@ using CookBook.API.Services;
 using CookBook.Models.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
+using System.Net.WebSockets;
+using System.Runtime.CompilerServices;
 
 namespace CookBook.API.Controllers
 {
@@ -26,7 +30,7 @@ namespace CookBook.API.Controllers
         /// <returns></returns>
         [Authorize]
         [HttpGet]
-        [Route("Add")]
+        [Route("Add/{mealId}")]
         public async Task<ActionResult<Favorite>> NewFavorites(int mealId)
         {
             try 
@@ -63,27 +67,21 @@ namespace CookBook.API.Controllers
         /// <returns></returns>
         [Authorize]
         [HttpDelete]
-        [Route("Delete")]
-        public async Task<IActionResult> DeleteFavorite(int mealId)
+        [Route("Delete/{id:int}")]
+        public async Task<IActionResult> DeleteFavorite(int id)
         {
-           
-            Meal meal = await context.Meals.FirstOrDefaultAsync(x => x.Id == mealId);
-            if (meal==null) 
-            {
-                return NotFound("Ilyen recept nem létezik ");
-            }
-            Favorite result = await context.Favorites.FirstOrDefaultAsync(x => x.MealsId == meal.Id&&x.UserId==UserService.GetUserId(User));
+            Favorite? result = await context.Favorites.FirstOrDefaultAsync(x => x.Id == id);
         
             if (result == null)
             {
-                return NotFound("Ilyen recept nem szerepel a kedvencek között ");
+                return NotFound("Ilyen recept nem szerepel a kedvencek között!");
             }
             else
             {
                 context.Favorites.Remove(result);
                 context.SaveChanges();
 
-                return Ok("A megadott kedvenc törölve lett a kedvencek közül");
+                return Ok("A recept törölve lett a kedvencek közül!");
 
             }
         }
@@ -128,6 +126,51 @@ namespace CookBook.API.Controllers
                 return Ok("Nincs még kedvelt recept.");
             }
             catch (Exception ex) { return BadRequest("Valami hiba történt"); }
+        }
+
+
+        /// <summary>
+        /// Return the top 10 meals what have most likes.
+        /// Method GET, endpoint: api/favorite/top
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("top")]
+        public async Task<ActionResult<List<TopMealDTO>>> GetTopMeals()
+        {
+            var likesWithMealIds = await context.Favorites
+                .GroupBy(x => x.MealsId)
+                .Select(y => new
+                {
+                    likes = y.Count(),
+                    mealId = y.Key
+                })
+                .OrderByDescending(z => z.likes)
+                .Take(10)
+                .ToListAsync();
+
+            if (likesWithMealIds.Count > 0)
+            {
+                List<TopMealDTO> TopList = new();
+
+                for (int i = 0; i < likesWithMealIds.Count; i++)
+                {
+                    var item = context.Meals
+                        .Include(type => type.MealType)
+                        .FirstOrDefault(index => index.Id == likesWithMealIds.ElementAt(i).mealId);
+
+                    if (item != null)
+                    {
+                        TopMealDTO meal = item.ToTopMealDTO(likesWithMealIds.ElementAt(i).likes, i + 1);
+
+                        TopList.Add(meal);
+                    }
+                }
+
+                return Ok(TopList);
+            }
+
+            return Conflict("Nem sikerült a toplista lekérése!");
         }
     }
 }

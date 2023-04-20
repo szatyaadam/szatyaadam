@@ -14,7 +14,7 @@ namespace CookBook.API.Controllers.DTO
         {
             Id = user.Id,
             UserName = user.UserName,
-            Password= user.Password,
+            Password = user.Password,
             Role = user.Role?.RoleName,
             Meals = user.Meals?.ToListMealsDTO()
         };
@@ -36,30 +36,40 @@ namespace CookBook.API.Controllers.DTO
         };
         public static IngredientDTO ToIngredientDTO(this Ingredient ingredient) => new IngredientDTO
         {
+            Id = ingredient.Id,
             Quantity = ingredient.Quantity,
-            Material = ingredient.Materials?.ToMaterialDTO()
+            Materials = ingredient.Materials?.ToMaterialDTO()
         };
         public static MealDTO ToMealDTO(this Meal meal) => new MealDTO
         {
-            Id= meal.Id,
+            Id = meal.Id,
             MealName = meal.MealName,
             PreperationTime = meal.PreperationTime,
             Price = meal.Price,
             Photo = meal.Photo,
             Discription = meal.Discription,
             Ingredients = meal.Ingredients.ToListIngredientsDTO(),
-            Mealtype = meal.MealType
+            MealType = meal.MealType,
+            Privacy = meal.Privacy,
+            UserId = meal.UserId
         };
-
+        public static TopMealDTO ToTopMealDTO(this Meal meal, int likes, int rank) => new TopMealDTO
+        {
+            Id = meal.Id,
+            MealName = meal.MealName,
+            PreperationTime = meal.PreperationTime,
+            Price = meal.Price,
+            Photo = meal.Photo,
+            Discription = meal.Discription,
+            Ingredients = meal.Ingredients.ToListIngredientsDTO(),
+            MealType = meal.MealType,
+            Likes = likes,
+            Rank = rank
+        };
         
         public static List<UserDTO> ToListUsersDTO(this IEnumerable<User> source) => source.Select(src => src.ToUserDTO()).ToList();
         public static List<MaterialDTO> ToListMaterialsDTO(this IEnumerable<Material> source) => source.Select(src => src.ToMaterialDTO()).ToList();
         public static List<IngredientDTO> ToListIngredientsDTO(this IEnumerable<Ingredient> source) => source.Select(src => src.ToIngredientDTO()).ToList();
-        public static List<MealDTO> ToListMealsDTO(this IEnumerable<Meal> source) => source.Select(src => src.ToMealDTO()).ToList();
-        
-
-
-
-        
+        public static List<MealDTO> ToListMealsDTO(this IEnumerable<Meal> source) => source.Select(src => src.ToMealDTO()).ToList(); 
     }
 }

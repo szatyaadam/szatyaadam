@@ -4,21 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:CookBook.WPF.ViewModels"
-        
         mc:Ignorable="d"
-         Height="450" Width="800" MinHeight="600" MinWidth="800"
+        Height="450" Width="800" MinHeight="600" MinWidth="800"
         WindowStyle="None"
-            Background="Transparent"
+        Background="Transparent"
         ResizeMode="CanResizeWithGrip"
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
-
     <Window.DataContext >
-        
         <vm:MainViewModel />
     </Window.DataContext>
     <Window.Resources>
         <Style TargetType="MenuItem">
             <Setter Property="Padding" Value="5" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
         </Style>
     </Window.Resources>
     <Border BorderThickness="10 40 10 10"
@@ -30,7 +28,6 @@
                 <GradientStop Color="#FFF9C896" Offset="0.444"/>
             </LinearGradientBrush>
         </Border.Background>
-
         <Border.BorderBrush>
             <LinearGradientBrush EndPoint="0,1" StartPoint="1,0" Opacity="0.85">
                 <GradientStop Color="#FF3E3734" Offset="0"/>
@@ -39,62 +36,84 @@
             </LinearGradientBrush>
         </Border.BorderBrush>
         <Grid ShowGridLines="False">
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0"  />
-            <RowDefinition Height="40" MinHeight="5" MaxHeight="85" />      
-            <RowDefinition Height="6" />
-            <RowDefinition Height="*"  />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions >
-            <ColumnDefinition Width="*"  />
-        </Grid.ColumnDefinitions>
-            
-            
-            <Menu Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0"  />
+                <RowDefinition Height="40" 
+                               MinHeight="5" 
+                               MaxHeight="65" />
+                <RowDefinition Height="6" />
+                <RowDefinition Height="*"  />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="*"  />
+            </Grid.ColumnDefinitions>
+            <Menu Grid.Row="1"
+                  Background="#FF976E4E"
+                  HorizontalAlignment="Stretch">
                 <Menu.ItemsPanel  >
-                    <ItemsPanelTemplate>
-                    <VirtualizingStackPanel Orientation="Horizontal">
-                        <VirtualizingStackPanel.Background>
-                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                <GradientStop Color="#323232" Offset="0.0" />
-                                <GradientStop Color="#3F3F3F" Offset="0.45" />
-                                <GradientStop Color="#1C1C1C" Offset="1.0" />
-                            </LinearGradientBrush>
-
-                        </VirtualizingStackPanel.Background>
-                    </VirtualizingStackPanel>
-
-              
-                </ItemsPanelTemplate>
-           
+                    <ItemsPanelTemplate   >
+                        <VirtualizingStackPanel Orientation="Horizontal" >
+                            <VirtualizingStackPanel.Background>
+                                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                    <GradientStop Color="#323232" Offset="0.0" />
+                                    <GradientStop Color="#3F3F3F" Offset="0.45" />
+                                    <GradientStop Color="#1C1C1C" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </VirtualizingStackPanel.Background>
+                        </VirtualizingStackPanel>
+                    </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
-                
-          
-            <MenuItem FontWeight="Bold" FontSize="20" Foreground="White" Header="Meals" 
+                <MenuItem Width="50" 
+                          BorderThickness="3,3,3,3" 
+                          Template="{StaticResource NoMouseOverButtonTemplate}" >
+                    <MenuItem.Background >
+                        <ImageBrush ImageSource="/Views/Icon.png" Stretch="UniformToFill"  />
+                    </MenuItem.Background>
+                </MenuItem>
+                <MenuItem 
+                      FontWeight="Bold"
+                      FontSize="20"
+                      Foreground="White"
+                      Header="Ételek" 
                       Command="{Binding UpdateViewCommand}"
-                      CommandParameter="Meals"/>
-            <MenuItem FontWeight="Bold" FontSize="20" Foreground="White" Header="Users" 
+                      CommandParameter="Meals"
+                      Click="Timer" />
+                <MenuItem 
+                      FontWeight="Bold" 
+                      FontSize="20"
+                      Foreground="White"
+                      Header="Felhasználók" 
                       Command="{Binding UpdateViewCommand}"
-                      CommandParameter="User"/>    
-                <MenuItem FontWeight="Bold" FontSize="20" Foreground="White" Header="Login" 
-                      Command="{Binding UpdateViewCommand}"
-                      CommandParameter="Login"/>
-
-        </Menu>
-            <GridSplitter Grid.Row="2" 
-                      Background="Black"
-                      HorizontalAlignment="Stretch"/>
+                      CommandParameter="User"
+                      Click="Timer"/>
+                <MenuItem x:Name="Login" 
+                          FontWeight="Bold"
+                          FontSize="20" 
+                          Foreground="White" 
+                          Header="Bejelentkezés" 
+                          Command="{Binding UpdateViewCommand}"
+                          CommandParameter="Login"
+                          Click="LogOut" />
+                <MenuItem   HorizontalAlignment="Right"
+                            x:Name="tbTime"
+                            FontWeight="Bold"
+                            FontSize="20"
+                            Foreground="White" 
+                            Header="" 
+                            CommandParameter="Time"  >
+                </MenuItem>
+            </Menu>
+            <GridSplitter  Grid.Row="2" 
+                           Background="Black"
+                           HorizontalAlignment="Stretch"/>
             <ContentControl Grid.Row="3" 
-                        Content="{Binding SelectedObject}"
-                        />
-                        
-        <DockPanel Grid.Row="0"
+                            Content="{Binding SelectedObject}" />
+            <DockPanel Grid.Row="0"
                        Margin="290,0,0,0" 
                        Width="290" 
-                       Grid.Column="1" HorizontalAlignment="Right">
-
-            <Button Content="X"
+                       Grid.Column="1"
+                       HorizontalAlignment="Right">
+                <Button Content="X"
                         Width="30" 
                         BorderThickness="2,0,0,0" 
                         Height="40" 
@@ -106,17 +125,16 @@
                         HorizontalAlignment="Right" 
                         BorderBrush="#FFC8C8C8"
                         Margin="0,0,0,-100">
-                <Button.Background>
-                    <SolidColorBrush Color="#FFB12C2C" Opacity="1"/>
-                </Button.Background>
-                <Button.RenderTransform>
+                    <Button.Background>
+                        <SolidColorBrush Color="#FFB12C2C" 
+                                         Opacity="1"/>
+                    </Button.Background>
+                    <Button.RenderTransform>
                         <TransformGroup>
                             <TranslateTransform Y="-70"/>
-                    </TransformGroup>
-                </Button.RenderTransform>
-
-            </Button>
-
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                </Button>
                 <Button Content="#"
                         Width="30" 
                         Background="#FFC0AA19" 
@@ -133,12 +151,10 @@
                     <Button.RenderTransform>
                         <TransformGroup>
                             <TranslateTransform Y="-70"/>
-                    </TransformGroup>
-                </Button.RenderTransform>
-            </Button>
-
-
-            <Button Content="_"
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                </Button>
+                <Button Content="_"
                         Width="30" 
                         Height="40" 
                         FontWeight="DemiBold" 
@@ -150,15 +166,13 @@
                         DockPanel.Dock="Right" 
                         HorizontalAlignment="Right"
                         Margin="0,0,0,-100">
-                <Button.RenderTransform>
+                    <Button.RenderTransform>
                         <TransformGroup>
                             <TranslateTransform Y="-70"/>
-                    </TransformGroup>
-                </Button.RenderTransform>
-            </Button>
-
-        </DockPanel>
-    </Grid>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                </Button>
+            </DockPanel>
+        </Grid>
     </Border>
-
 </Window>

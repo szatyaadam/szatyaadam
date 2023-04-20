@@ -6,12 +6,14 @@
         {
 
         }
-        public IngredientDTO(short quantity, MaterialDTO material)
+        public IngredientDTO(int id ,short quantity, MaterialDTO materials)
         {
+            Id = id;
             Quantity = quantity;
-            Material = material;
+            Materials = materials;
         }
+        public int? Id { get; set; }
         public short? Quantity { get; set; }
-        public MaterialDTO? Material { get; set; }
+        public MaterialDTO? Materials { get; set; }
     }
 }

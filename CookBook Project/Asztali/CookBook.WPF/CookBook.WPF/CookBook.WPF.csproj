@@ -5,11 +5,18 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\images\Icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\images\Icon.png" />
     <None Remove="Resources\images\key.png" />
     <None Remove="Resources\images\user.png" />
+    <None Remove="Views\Icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\images\Icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,11 +28,13 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Backend\ApiClient\CookBook.ApiClient.csproj" />
     <ProjectReference Include="..\..\..\Backend\cookbookAPI\CookBook.Models\CookBook.Models.csproj" />
+    <ProjectReference Include="..\..\..\Backend\JWTSecurity\CookBook.JWTSecurity.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Resources\images\key.png" />
     <Resource Include="Resources\images\user.png" />
+    <Resource Include="Views\Icon.png" />
   </ItemGroup>
 
 </Project>

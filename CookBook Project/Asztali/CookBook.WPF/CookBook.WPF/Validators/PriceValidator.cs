@@ -10,12 +10,9 @@ namespace CookBook.WPF.Validators
             if (value != null)
             {
                 decimal.TryParse(value.ToString(), out decimal number);
-                if (number > 0)
-                {
-                    return ValidationResult.ValidResult;
-                }
+                if (number > 0) return ValidationResult.ValidResult;
             }
-            return new ValidationResult(false, "A mező csak 0-nál nagoybb számot tartalmazhat.");
+            return new ValidationResult(false, "A mező csak 0-nál nagyobb számot tartalmazhat.");
         }
     }
 }

@@ -6,49 +6,45 @@
              mc:Ignorable="d"
         Background="Wheat"
         >
-
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-
-
         <Grid Grid.RowSpan="2"  >
-             <StackPanel  >
-
-                <Border CornerRadius="50,50,50,50" Background="#FFA19681" Margin="60" MaxWidth="700" MaxHeight="400">
+            <StackPanel  >
+                <Border CornerRadius="50,50,50,50"
+                        Background="#FFA19681"
+                        Margin="60" 
+                        MaxWidth="700" 
+                        MaxHeight="400">
                     <Border.Effect>
                         <DropShadowEffect/>
                     </Border.Effect>
-
-
-                    <StackPanel Margin="20 20 20 20"  MaxHeight="500" MinHeight="300" MinWidth="20">
+                    <StackPanel Margin="20 20 20 20" 
+                                MaxHeight="500"
+                                MinHeight="300"
+                                MinWidth="20">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
-
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
-
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition ></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-
-                          
-                            <TextBlock Text="SIGN IN"
+                            <TextBlock Text="Bejelentkezés"
                                        VerticalAlignment="Center"
                                        Margin="0 10 0 0"
                                        FontSize="40"
                                        FontWeight="Bold"
-                                       Width="200"
+                                       Width="auto"
                                        Height="60"
                                        TextAlignment="Center" 
                                        Foreground="Black"
@@ -66,20 +62,14 @@
                                   Grid.ColumnSpan="2"
                                   Margin="0,-400,0,10"
                                   Visibility="Hidden"
-                              
                                     >
-                                <TextBlock 
-                                        Padding="20,180,20,20"
-                                        Text="{Binding ErrorMessages ,UpdateSourceTrigger=PropertyChanged}"
-                                        TextAlignment="Center"
-                                   
-                                       FontSize="20"
-                                       FontWeight="Bold"
-                                       
-                                       Foreground="Black"
-                                      Background="#FFA19681"
-                                     >
-                                    
+                                <TextBlock Padding="20,180,20,20"
+                                           Text="{Binding ErrorMessages ,UpdateSourceTrigger=PropertyChanged}"
+                                           TextAlignment="Center"
+                                           FontSize="20"
+                                           FontWeight="Bold"
+                                           Foreground="Black"
+                                           Background="#FFA19681" >
                                 </TextBlock>
                                 <Button     Click="LogOut_Click"
                                             Margin="380 300 20 20"
@@ -90,179 +80,138 @@
                                             Height="30"
                                             BorderThickness="0,0,0,0"
                                             Foreground="White"
-                                            Content="Log out"
-                                            Padding="2,2,2,0 "
-                                            
-                                            
-                             >
-
+                                            Content="Kilépés"
+                                            Padding="2,2,2,0 " >
                                     <Button.Effect>
                                         <DropShadowEffect/>
                                     </Button.Effect>
-
                                     <Button.Background>
                                         <SolidColorBrush Color="Black"
                                                          Opacity="0.9"/>
                                     </Button.Background>
-
                                 </Button>
                             </Grid>
-
-                            <TextBlock          HorizontalAlignment="Center"
-                                                FontWeight="ExtraBlack"
-                                                FontSize="20"
-                                                Text="Username"
-                                                Grid.Row="1"
-                                                Grid.ColumnSpan="2">
+                            <TextBlock  HorizontalAlignment="Center"
+                                        FontWeight="ExtraBlack"
+                                        FontSize="20"
+                                        Text="Felhasználónév"
+                                        Grid.Row="1"
+                                        Grid.ColumnSpan="2">
                             </TextBlock>
-                            <Border Grid.Row="2" Background="White" CornerRadius="10,0,0,10" Width="100" HorizontalAlignment="Right"  Padding="0,0,10,0"  Margin="0,0,100,0"    >
-                                <TextBlock                                 
-                                                Grid.Row="2"
-  
-                                               >
+                            <Border Grid.Row="2" 
+                                    Background="White" 
+                                    CornerRadius="10,0,0,10" 
+                                    Width="100"
+                                    HorizontalAlignment="Right"
+                                    Padding="0,0,10,0"
+                                    Margin="0,0,100,0" >
+                                <TextBlock  Grid.Row="2" >
                                     <TextBlock.Background >
                                         <ImageBrush ImageSource="/Resources/images/user.png"  />
                                     </TextBlock.Background>
-
-
                                 </TextBlock>
                             </Border>
-                            <Border CornerRadius="0,10,10,0" Background="White" Width="300"  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="-100,0,0,0"  >
+                            <Border CornerRadius="0,10,10,0" 
+                                    Background="White"
+                                    Width="300" 
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    Margin="-100,0,0,0"  >
 
 
-                                <TextBox   
-                                           
-                                           x:Name="UserName"
+                                <TextBox   x:Name="UserName"
                                             Margin="10 5"
                                             Padding="0 20 0 20" 
                                             SelectionBrush="White" 
                                             Foreground="Black" 
                                             BorderBrush="White" 
                                             FontSize="20"
-                                            Text="{Binding Username}"
-                                            >
-                                   
+                                            Text="{Binding Username}" >
                                 </TextBox>
-
-                
                             </Border>
-                            <TextBlock              HorizontalAlignment="Center"
-                                                FontWeight="ExtraBlack"
-                                                FontSize="20"
-                                                Text="Password"
-                                                Grid.Row="3" 
-                                                Grid.ColumnSpan="2">
-
-                           
+                            <TextBlock  HorizontalAlignment="Center"
+                                        FontWeight="ExtraBlack"
+                                        FontSize="20"
+                                        Text="Jelszó"
+                                        Grid.Row="3" 
+                                        Grid.ColumnSpan="2">
                             </TextBlock>
-                            <Border Grid.Row="4" Background="White" CornerRadius="10,0,0,10" Width="100" HorizontalAlignment="Right" Padding="5,0,20,0" Margin="0,0,100,0"  >
+                            <Border Grid.Row="4" 
+                                    Background="White" 
+                                    CornerRadius="10,0,0,10"
+                                    Width="100" 
+                                    HorizontalAlignment="Right"
+                                    Padding="5,0,20,0" 
+                                    Margin="0,0,100,0"  >
                                 <TextBlock  Grid.Row="4" >
                                     <TextBlock.Background>
                                         <ImageBrush ImageSource="/Resources/images/key.png"/>
                                     </TextBlock.Background>
-                                 </TextBlock>
+                                </TextBlock>
                             </Border>
-                          
-                            <Border CornerRadius="0,10,10,0" Background="White" Width="300"  Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" Margin="-100,0,0,0" >
-                                <PasswordBox 
-                                         
-                                         x:Name="password" 
-                                         PasswordChar="*"
-                                         Margin="10 5"
-                                         Padding="0 20 0 20" 
-                                         SelectionBrush="White" 
-                                         Foreground="Black" 
-                                         BorderBrush="White"
-                                         FontSize="20">
+                            <Border CornerRadius="0,10,10,0"
+                                    Background="White" 
+                                    Width="300"  
+                                    Grid.Row="4"
+                                    Grid.Column="2" 
+                                    HorizontalAlignment="Left"
+                                    Margin="-100,0,0,0" >
+                                <PasswordBox x:Name="password" 
+                                             PasswordChar="*"
+                                             Margin="10 5"
+                                             Padding="0 20 0 20" 
+                                             SelectionBrush="White" 
+                                             Foreground="Black" 
+                                             BorderBrush="White"
+                                             FontSize="20">
                                     <PasswordBox.InputBindings>
                                         <KeyBinding Key="Return" Command="{Binding LoginCommand}" />
                                     </PasswordBox.InputBindings>
                                 </PasswordBox>
-                             
-
                             </Border>
                             <TextBlock Name="wrongInput"
-                                        Grid.Row="5"
-                                        Text="Wrong username or password"
+                                       Grid.Row="5"
+                                       Text="Wrong username or password"
                                        VerticalAlignment="Center"
                                        Visibility="Hidden"
                                        FontSize="12"
                                        FontWeight="Bold"
                                        Width="200"
                                        Height="100"
-                                        Grid.ColumnSpan="2"
-                                       Foreground="red"
-                                       
-                                       >
-
-
+                                       Grid.ColumnSpan="2"
+                                       Foreground="red" >
                             </TextBlock>
-                            <StackPanel 
-                                        Name="Buttons"
+                            <StackPanel Name="Buttons"
                                         Orientation="Horizontal"
                                         HorizontalAlignment="Center" 
                                         Margin="0,10,10,10" 
                                         Grid.Row="5" 
                                         Grid.ColumnSpan="2"
                                         Visibility="Visible">
-
-                                <!--<Button Margin="10 20"
-                                            Width="90"
-                                            FontWeight="Bold"
-                                            FontSize="20"
-                                            BorderThickness="0,0,0,0"
-                                            Foreground="White"
-                                            Content="Sign up"
-                                            
-                                            >
-                                    <Button.Effect>
-                                        <DropShadowEffect/>
-                                    </Button.Effect>
-                                    <Button.Background>
-                                        <SolidColorBrush Color="Black"
-                                                             Opacity="0.9"
-                                             />
-                                    </Button.Background>
-                                </Button>-->
-
-                                <Button Margin="10 20"
+                                <Button     Margin="10 20"
                                             Width="90"
                                             FontWeight="Bold"
                                             FontSize="20"
                                             Command="{Binding LoginCommand}"
                                             BorderThickness="0,0,0,0"
                                             Foreground="White"
-                                            Content="Login"
+                                            Content="Belépés"
                                             Name="button1"
-                                            Click="PasswordBox_PasswordChanged"
-                                        
-                                             
-                             >
-
+                                            Click="PasswordBox_PasswordChanged" >
                                     <Button.Effect>
                                         <DropShadowEffect/>
                                     </Button.Effect>
-
                                     <Button.Background>
                                         <SolidColorBrush Color="Black"
                                                          Opacity="0.9"/>
                                     </Button.Background>
-
                                 </Button>
-                             
-
                             </StackPanel>
                         </Grid>
                     </StackPanel>
-
                 </Border>
-
             </StackPanel>
-
         </Grid>
-
     </Grid>
-
-
-
 </UserControl>

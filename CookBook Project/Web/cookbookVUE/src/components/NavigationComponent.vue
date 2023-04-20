@@ -1,55 +1,148 @@
 <template>
-    <nav class="navbar fixed-top">
-        <div class="d-flex gap-4 fs-3 justify-content-start mx-3 my-lg-0 align-items-center w-100">
-            <RouterLink to="/" class="text-decoration-none text-center">
-                <!-- ICON -->
-                <svg class="m-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                    <path fill="#FF9800"
-                        d="M416 160c0-26.5-21.5-48-48-48h-32c-26.5 0-48 21.5-48 48v160c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V160z" />
-                    <path fill="#FF9800"
-                        d="M312.6 128h-95.2c-14.8 0-26.6 11.8-26.6 26.6 0 14.8 11.8 26.6 26.6 26.6h95.2c14.8 0 26.6-11.8 26.6-26.6 0-14.8-11.8-26.6-26.6-26.6z" />
-                    <path fill="#FF9800"
-                        d="M224 48C100.3 48 0 148.3 0 272s100.3 224 224 224 224-100.3 224-224S347.7 48 224 48zm0 336c-88.2 0-160-71.8-160-160S135.8 112 224 112s160 71.8 160 160-71.8 160-160 160z" />
-                </svg>
-            </RouterLink>
-            <!-- COOKBOOK (HOME) -->
-            <RouterLink to="/" class="text-decoration-none">CookBook</RouterLink>
-            <!-- PROFILE -->
-            <RouterLink to="/profile" class="text-decoration-none" v-if="user.user.loggedIn">Profile</RouterLink>
-            <!-- USER PROFILE -->
-            <div id="toggle_user" class="ms-auto"></div>
-            <!-- LOGIN -->
-            <RouterLink to="/login" class="text-decoration-none" v-if="!user.user.loggedIn">Login</RouterLink>
+    <nav class="navbar fixed-top align-content-center">
+      <!-- ICON -->
+      <RouterLink to="/"
+         class="text-center"
+         @click="goToTop">
+        <FSIcon/>
+      </RouterLink>
+      <!-- EXPANDED MENU -->
+      <div class="d-none d-lg-flex flex-grow-1 gap-5 align-items-center">
+        <!-- COOKBOOK (HOME) -->
+        <RouterLink to="/" class="fs-3">CookBook</RouterLink>
 
-            <button class="btn w-auto text-light fs-4" v-else type="button"
-                @mouseup.prevent="user.logout()">Logout</button>
+        <!-- PROFILE -->
+        <RouterLink v-if="user.user.loggedIn"
+                    :to="{path: `/profil/${user.user.userName}`}">
+                    Profil
+        </RouterLink>
+
+        <!-- SEARCH -->
+        <div id="search-input"></div>
+
+        <!-- LOGIN/LOGOUT -->
+        <div class="pe-4 ms-auto">
+          <!-- LOGIN -->
+          <RouterLink v-if="!user.user.loggedIn"
+                      to="/login" 
+                      >Bejelentkezés
+          </RouterLink>
+
+          <!-- LOGOUT -->
+          <button v-else type="button"  
+                  class="btn w-auto text-light" 
+                  @mouseup.prevent="user.logout()"
+                  >Kijelentkezés
+          </button>
         </div>
+      </div>
+
+      <!-- SEARCH -->
+      <div v-if="$route.name == 'home'"
+           class="d-block d-lg-none">
+        <div id="search-input"></div>
+      </div>
+
+      <!-- HAMBURGER MENU BUTTON-->
+      <div class="d-flex d-lg-none ms-auto pe-2">
+        <button @click="expand"
+                class="p-0">
+          <HamburgerMenuIcon/>
+        </button>
+      </div>
+
+      <!-- HAMBURGER MENU -->
+      <div v-if="!collapse" 
+           id="hamburger_nav" 
+           class="d-lg-none" 
+           @click="expand">
+        <HamburgerMenu />
+      </div>
     </nav>
 </template>
 
 <script setup>
+import FSIcon from '../assets/icon/ForkSpoonIcon.vue'
+import HamburgerMenuIcon from '../assets/icon/HamburgerMenuIcon.vue';
 import { RouterLink } from 'vue-router'
 import { useUserStore } from '../stores/user';
+import { ref } from 'vue';
+import HamburgerMenu from './HamburgerMenuComponent.vue'
 
 const user = useUserStore()
+const collapse = ref(true)
+
+const expand = () => collapse.value = !collapse.value
+const goToTop = () => window.scrollTo(0,0)
 </script>
 
 <style scoped>
-nav {
-  background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
-  background-blend-mode: multiply;
+.navbar {
+  position: sticky;
+  display: flex;
+  justify-content: start;
+  gap: 10px;
+  padding-left: 10px;
+  height: var(--nav-height);
+  background:rgb(0, 0, 0) 99.4%; 
 }
 
-nav a{
+@media screen and (max-width: 240px) {
+  nav{
+    flex-direction: column;
+    height: fit-content;
+  }
+}
+
+.navbar a {
   color: rgb(245, 245, 245);
+  text-decoration: none;
 }
 
-nav a:hover {
+.navbar a:hover {
   color: rgb(255, 255, 255);
 }
 
-svg{
-  height: 80px;
+#space_holder {
+  height: var(--nav-height);
 }
 
+button {
+  background-color: transparent;
+  border: transparent;
+}
+
+svg {
+  height: 40px;
+  align-self: flex-end;
+  fill: azure;
+  margin: 0 10px;
+}
+
+#hamburger_nav {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100vh;
+  padding: 0;
+  margin-top: var(--nav-height);
+  background-color: #100e05f9;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.search_input{
+  min-width: 80px;
+  width: 20vw;
+  max-width: 230px;
+  align-self: center;
+}
+
+@media only screen and (max-width: 260px) {
+  #search_input {
+    display: none !important;
+  }
+}
 </style>

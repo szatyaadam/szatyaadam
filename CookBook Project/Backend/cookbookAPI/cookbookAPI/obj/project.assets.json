@@ -3644,6 +3644,9 @@
       "CookBook.ApiClient/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "CookBook.Models": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/CookBook.ApiClient.dll": {}
         },

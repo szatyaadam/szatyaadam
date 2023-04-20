@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -13,11 +14,36 @@ namespace CookBook.JWTSecurity.Services
         // Read from appsettings.json
         private readonly IConfiguration _configuration;
 
+        private string Key;
+        private string Issuer;
+        private string Audience;
+
         public JwtManagerService(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
+        public JwtManagerService(string key, string issuer, string audience)
+        {
+            Key = key;
+            Issuer = issuer;
+            Audience = audience;
+        }
+        public JwtToken TESTGenerateToken(List<Claim> claims)
+        {
+            var key = Encoding.UTF8.GetBytes(Key);
+            var signIn = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature);
+            var token = new JwtSecurityToken(
+                        Issuer,
+                        Audience,
+                        claims,
+                        expires: DateTime.UtcNow.AddMinutes(20),
+
+                        signingCredentials: signIn);
+            var accessToken = new JwtSecurityTokenHandler().WriteToken(token);
+            var refreshToken = GenerateRefreshToken();
+            return new JwtToken { Access_Token = accessToken, Refresh_Token = refreshToken };
+        }
         /// <summary>
         /// Generate a JWT token with claims.
         /// </summary>
@@ -31,7 +57,7 @@ namespace CookBook.JWTSecurity.Services
                         _configuration["Jwt:Issuer"],
                         _configuration["Jwt:Audience"],
                         claims,
-                        expires: DateTime.UtcNow.AddMinutes(20),
+                        expires: DateTime.UtcNow.AddMinutes(45),
 
                         signingCredentials: signIn);
             var accessToken = new JwtSecurityTokenHandler().WriteToken(token);

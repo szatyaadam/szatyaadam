@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CookBook.Models.Models;
 using CookBook.ApiClient.Models.DTO;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace CookBook.API.Controllers
 {
@@ -22,7 +21,7 @@ namespace CookBook.API.Controllers
         {
             _context = cookbookContext;
         }
-
+        //ez a User viewModellhez kell. 
    
         [Authorize]
         [HttpGet]
@@ -68,13 +67,10 @@ namespace CookBook.API.Controllers
             }
             //összes kiválasztott elem db
             int count = await query.CountAsync();
-
-            // Oldaltördelés
             if (page > 0 && itemsPerPage > 0)
             {
                 query = query.Skip((page - 1) * itemsPerPage).Take(itemsPerPage);
             }
-
             var result = await query.ToListAsync();
 
             return new TableDTO<User>(count, result);
@@ -119,11 +115,22 @@ namespace CookBook.API.Controllers
         {
             User? userClaims = await _context.Users
                 .Include(x => x.Role)
-    .           FirstOrDefaultAsync(u => u.Id == UserService.GetUserId(User));
+                .FirstOrDefaultAsync(u => u.Id == UserService.GetUserId(User));
 
-            if (CheckNameAndEmail(user.UserName, user.Email))
+            if (!String.IsNullOrWhiteSpace(user.UserName) && userClaims.UserName != user.UserName)
             {
-                return Conflict("Ez az email vagy felhasználónév már foglalt.");
+                if (CheckName(user.UserName))
+                {
+                    return Conflict("Ez a felhasználónév már foglalt.");
+                }
+            }
+            
+            if (!String.IsNullOrWhiteSpace(user.Email) && userClaims.Email != user.Email)
+            {
+                if (CheckName(user.UserName))
+                {
+                    return Conflict("Ez az email cím már foglalt.");
+                }
             }
 
             user = UserService.SwapUser(userClaims, user);
@@ -151,7 +158,7 @@ namespace CookBook.API.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("signup")]
-        public async Task<ActionResult<UserDTO>> SignUpUser(User user)
+        public async Task<ActionResult> SignUpUser(User user)
         {
             var existUser = _context.Users.Any(x => x.UserName.Equals(user.UserName) || x.Email.Equals(user.Email));
 
@@ -159,14 +166,14 @@ namespace CookBook.API.Controllers
             {
                 user.RoleId = USER_ROLE_ID;
                 user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
-                user.Role = await _context.Roles.FindAsync(user.RoleId);
+                user.Role = _context.Roles.Find(user.RoleId);
                 _context.Add(user);
                 await _context.SaveChangesAsync();
 
-                return CreatedAtAction("profile", new { id = user.Id }, user.ToUserDTO());
+                return Ok("Sikeres regisztráció.");
             }
             
-            return BadRequest("Failer registration. Please check name and email.");
+            return Conflict("Már regisztrálva van ez a felhasználó név vagy email.");
         }
 
 
@@ -198,9 +205,15 @@ namespace CookBook.API.Controllers
         /// <param name="name"></param>
         /// <param name="email"></param>
         /// <returns><see cref="bool"/></returns>
-        public bool CheckNameAndEmail(string name, string email)
+        public bool CheckName(string name)
         {
-            return _context.Users.Where(x => x.Id != UserService.GetUserId(User)).Any(u => u.UserName == name || u.Email == email );
+            return _context.Users.Where(x => x.Id != UserService.GetUserId(User)).Any(u => u.UserName == name);
+        }
+
+        public bool CheckEmail(string email)
+        {
+            return _context.Users.Where(x => x.Id != UserService.GetUserId(User)).Any(u => u.Email == email);
+
         }
     }
 }

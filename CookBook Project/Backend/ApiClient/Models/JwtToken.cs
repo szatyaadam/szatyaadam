@@ -4,7 +4,6 @@
     {
         public JwtToken()
         {
-
         }
         public JwtToken(string accessToken, string refreshToken)
         {

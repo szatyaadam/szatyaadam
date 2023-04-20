@@ -21,7 +21,6 @@ namespace CookBook.API.Data
                 optionsBuilder.UseMySql("server=localhost;user id=root;database=cookbook", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.4.22-mariadb"));
             }
         }
-
         public virtual DbSet<Favorite> Favorites { get; set; } = null!;
         public virtual DbSet<Ingredient> Ingredients { get; set; } = null!;
         public virtual DbSet<Material> Materials { get; set; } = null!;

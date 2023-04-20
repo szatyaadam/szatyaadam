@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\adam\source\repos\szatyaadam\CookBook Project\Asztali\CookBook.WPF\CookBook.WPF\App.xaml
-7-1733547724
+8193939071
+1-1588196145
+201788064534
+3371804976602
+Resources\DataTmpResource.xaml;Resources\ErrorTmpResource.xaml;Resources\NoMouseOverButtonTmpResource.xaml;Resources\Styles.xaml;Views\LoginView.xaml;Views\MainWindow.xaml;Views\MealsView.xaml;Views\UserView.xaml;
 
-17-1649494158
-201337266148
-Resources\DataTmpResource.xaml;Resources\ErrorTmpResource.xaml;Resources\Styles.xaml;Views\LoginView.xaml;Views\MainWindow.xaml;Views\MealsView.xaml;Views\UserView.xaml;
-
-False
+True
 

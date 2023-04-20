@@ -32,7 +32,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Backend\\cookbookAPI\\CookBook.Models\\CookBook.Models.csproj": {
+                "projectPath": "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Backend\\cookbookAPI\\CookBook.Models\\CookBook.Models.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

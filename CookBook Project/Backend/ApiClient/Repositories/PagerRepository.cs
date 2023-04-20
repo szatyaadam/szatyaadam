@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using CookBook.ApiClient.Models;
 using CookBook.ApiClient.Models.DTO;
 namespace CookBook.ApiClient.Repositories

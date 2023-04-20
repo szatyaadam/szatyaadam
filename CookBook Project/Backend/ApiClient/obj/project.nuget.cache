@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "/5Q+NCK07E/IAEe6y8DToRHvUvQ0nJlcUXeoD87Jmm2Ldkq2shjT/kRhoyA0U9VuvBd7BcmJ8dIsKiVLKwQ6Mw==",
+  "dgSpecHash": "F/t0nemAl1+ZuAdNz6qeFgrZGL0re7w7mBUwzwlDAFtR5qBPAR+BunHERIihKQqXTPA8Qecvl9B9zsxLVREE7A==",
   "success": true,
   "projectFilePath": "C:\\Users\\adam\\source\\repos\\szatyaadam\\CookBook Project\\Backend\\ApiClient\\CookBook.ApiClient.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\adam\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.11\\microsoft.entityframeworkcore.abstractions.6.0.11.nupkg.sha512",
+    "C:\\Users\\adam\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\adam\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
+    "C:\\Users\\adam\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
