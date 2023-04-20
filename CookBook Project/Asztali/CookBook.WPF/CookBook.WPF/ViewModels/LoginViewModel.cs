@@ -101,6 +101,12 @@ namespace CookBook.WPF.ViewModels
             log.Username = _username;
             log.Password = Password;
             await Task.Run(LoadData);
+
+            List<string> valami = new List<string>
+            {
+                "",
+                ""
+            };
         }
     }
 }
