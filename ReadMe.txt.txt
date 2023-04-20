@@ -1,22 +1,42 @@
-CookBook project.
-Ez a project csapatmunka által készül .
-Jelenleg tartalmaz egy Api-t és egy adatbázist.
-A késöbbiekben tartalmazni fog :
-	-egy Vue Js segítségével megírt reszponzív weboldalt,
-	-Egy WPF asztali alkalmazást ,
-	-Teljes dokkumentációt a prjectekhez .
-A csoportmunkában kezdetben ketten dolgoztunk de haramdik embert is felvettünk aki a dokkumentációban segétkezik.
-Az itt található Vue Converter programot már elkészítettem ami késöbb leredukálva bekerül a reszponzív weboldalra.
-Az API létrehozása közös feladat volt. 
-Az Adatbázis részét szinte önállóan készítettem.
-Az én feladatom a WPF asztali alkalmazás létrehozása is. 
-Maga a project lényege egy receptes oldal készítése ahol a felhasználó :
-	-Regisztrálni tud,(Ez nem kötelező de addig csak böngészni tud az oldalon)
-	-Tokenes hitelesítéssel tud belépni ,
-	-Böngészhet a receptek között,
-	-Létrehozhat recepteket ,
-	-A kedvencek közé teheti őket.
-Részletesebb leírást a COOKBOOk_Adatbázis_dokumentációban talál.
+CookBook project;
+//This project made by teamWork what is contains two people;
+//The project Contains :
+	Object contains =new Object
+	{
+	     "Vue 3 js frontend responsive webPage",
+	     "a WPF console application that is available for the admins",
+	     "Documentation for users and developers",
+	     "MySQL Database",
+	     "Rest API project what is communicate the others others and provides the data"
+	};
+//For testing or view the project you need to have :
+				List<string> YouNeedToHave=new List<string>
+					{
+					"PhpMyAdmin(start the MySQL server, and add a new Database into it"+
+					   "you can find the SQL file here: CookBookProject/Adatbázis/cookbook04.14.sql, who is provides the Existed data)",
+					 "Visual Studio",
+					 "Visual Studio Code"
+					};
+
+//We divided the tasks but also work together in the same project part;
+//The Database and the WPF Desktop Application is my own parts;
+//The whole project essence is to make a Program where the User can:
+
+						Register(UserName,Password,Email);
+						//With Token authentication;
+						Login(UserName,Passord);
+						
+						if (Login())
+							{
+								FindAllRecepts();
+								CreateNewRecept();
+								ModifyOwnRecept();
+								DeleteOwnRecept();
+								AddToFavorits();
+							}
+						else FindAllRecepts();
+
+//You can find more details and description in :\Documentation\Developer_User_documentation;
 
 	
 	
